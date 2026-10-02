@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# build outputs
+.vercel/
+.tanstack/
+dist/
+
+# grok platform
+.grok/
+
+# large reference material, not needed for deploy
+attachments/
+artifacts/
+screenshots/
+
+# misc
+.DS_Store
+*.log
+.env
