@@ -40,7 +40,10 @@ function CakeDetail() {
           <CakeImage src={cake.image} alt={label} priority className="h-auto" />
         </div>
         <div className="flex flex-col justify-center">
-          <Badge>{label}</Badge>
+          <div className="flex flex-wrap gap-2">
+            <Badge>{label}</Badge>
+            {cake.theme && <Badge variant="outline">{copy.themes[cake.theme]}</Badge>}
+          </div>
           <h1 className="mt-4 font-display text-display text-foreground">
             {label}
           </h1>
