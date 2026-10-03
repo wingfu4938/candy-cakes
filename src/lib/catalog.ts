@@ -166,5 +166,5 @@ export function leadDaysFor(input: {
 export const VISIT = {
   facebook: "https://m.me/438937936222608",
   facebookPage: "https://www.facebook.com/CandyCakesNZ",
-  maps: "https://maps.google.com/?q=Shop+4+97Z+Heaphy+Terrace+Fairfield+Hamilton+3214",
+  maps: "https://maps.google.com/?q=Shop+4+977+Heaphy+Terrace+Fairfield+Hamilton+3214",
 };
