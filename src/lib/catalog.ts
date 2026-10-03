@@ -1,6 +1,7 @@
-import { GALLERY, type CategoryId, type GalleryCake } from "@/lib/gallery-data";
+import { GALLERY, KIDS_THEME_ORDER, type CategoryId, type GalleryCake, type KidsThemeId } from "@/lib/gallery-data";
 
-export type { CategoryId, GalleryCake };
+export type { CategoryId, GalleryCake, KidsThemeId };
+export { KIDS_THEME_ORDER };
 export type OccasionId =
   | "wedding"
   | "birthday"
