@@ -13,6 +13,7 @@ import {
   FINISHES,
   OCCASION_IDS,
   SIZES,
+  cakeNumber,
   getCake,
   leadDaysFor,
   occasionFor,
@@ -346,7 +347,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                     aria-checked={selected}
                     onClick={() => setDraft({ flavor: cake.slug as FlavorId })}
                     className={cn(
-                      "overflow-hidden rounded-lg border text-left transition-[border-color] duration-150",
+                      "relative overflow-hidden rounded-lg border text-left transition-[border-color] duration-150",
                       selected
                         ? "border-foreground"
                         : "border-border hover:border-foreground/35",
@@ -357,6 +358,9 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                       alt={copy.categories[cake.category]}
                       className="h-auto"
                     />
+                    <span className="absolute top-1.5 left-1.5 rounded-full bg-foreground/75 px-1.5 py-px text-[10px] font-medium tracking-wide text-background">
+                      {cakeNumber(cake)}
+                    </span>
                   </button>
                 );
               })}
@@ -551,7 +555,11 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           />
           <Row
             label={copy.order.rowFlavor}
-            value={flavorText?.name ?? copy.order.unset}
+            value={
+              flavorCake && flavorText
+                ? `No. ${cakeNumber(flavorCake)} · ${flavorText.name}`
+                : copy.order.unset
+            }
           />
           <Row
             label={copy.order.rowFinish}
