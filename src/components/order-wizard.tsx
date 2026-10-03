@@ -7,19 +7,20 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CakeImage } from "@/components/cake-image";
 import {
-  BASE_PRICE,
   CAKES,
   CATEGORY_IDS,
+  CREAM_FLAVORS,
+  CREAM_TYPES,
   FINISHES,
   OCCASION_IDS,
-  SIZES,
+  SINGLE_TIER_SIZES,
+  TIERED_SIZES,
   cakeNumber,
   getCake,
   leadDaysFor,
   occasionFor,
-  quotePrice,
-  sizePrice,
   type CategoryId,
+  type CreamId,
   type FinishId,
   type FlavorId,
   type OccasionId,
@@ -27,28 +28,29 @@ import {
 } from "@/lib/catalog";
 import {
   cakeCopy,
+  creamCopy,
   finishCopy,
   interpolate,
   occasionCopy,
   sizeCopy,
+  tasteCopy,
+  tasteNoteCopy,
   useCopy,
   useLocale,
 } from "@/lib/i18n";
 import { type Commission, useOrderStore } from "@/lib/order-store";
-import { cn, formatDate, formatPrice, toDateInput } from "@/lib/utils";
+import { cn, formatDate, toDateInput } from "@/lib/utils";
 
 function ChoiceCard({
   selected,
   onSelect,
   title,
   hint,
-  aside,
 }: {
   selected: boolean;
   onSelect: () => void;
   title: string;
   hint: string;
-  aside?: string;
 }) {
   return (
     <button
@@ -67,11 +69,6 @@ function ChoiceCard({
         <span className="block font-medium text-foreground">{title}</span>
         <span className="mt-1 block text-sm text-muted-foreground">{hint}</span>
       </span>
-      {aside && (
-        <span className="shrink-0 font-display text-sm text-foreground tabular-nums">
-          {aside}
-        </span>
-      )}
     </button>
   );
 }
@@ -98,7 +95,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     setStyleFilter(cake.category);
   }, [prefills, setDraft]);
 
-  const total = quotePrice(draft);
   const lead = leadDaysFor(draft);
   const minDate = useMemo(() => {
     const d = new Date();
@@ -115,8 +111,10 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     const e: string[] = [];
     if (step === 0 && !current.occasion) e.push(copy.order.errOccasion);
     if (step === 1 && !current.size) e.push(copy.order.errSize);
-    if (step === 2 && !current.flavor) e.push(copy.order.errFlavor);
-    if (step === 3 && !current.finish) e.push(copy.order.errFinish);
+    if (step === 2 && !current.flavor) e.push(copy.order.errDesign);
+    if (step === 3 && !current.cream) e.push(copy.order.errCream);
+    if (step === 3 && !current.taste) e.push(copy.order.errTaste);
+    if (step === 4 && !current.finish) e.push(copy.order.errFinish);
     if (e.length) {
       setErrors(e);
       return;
@@ -139,7 +137,13 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
         }),
       );
     }
-    if (!current.occasion || !current.size || !current.flavor) {
+    if (
+      !current.occasion ||
+      !current.size ||
+      !current.flavor ||
+      !current.cream ||
+      !current.taste
+    ) {
       e.push(copy.order.errIncomplete);
     }
     if (e.length) {
@@ -156,6 +160,9 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
   if (submitted) {
     const submittedCake = submitted.flavor
       ? cakeCopy(copy, submitted.flavor)
+      : undefined;
+    const submittedCakeObj = submitted.flavor
+      ? getCake(submitted.flavor)
       : undefined;
     return (
       <div className="rounded-xl bg-card p-6 shadow-[var(--shadow-border)] md:p-10">
@@ -183,7 +190,26 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
               submitted.size ? sizeCopy(copy, submitted.size).label : undefined
             }
           />
-          <Row label={copy.order.rowFlavor} value={submittedCake?.name} />
+          <Row
+            label={copy.order.rowDesign}
+            value={
+              submittedCakeObj && submittedCake
+                ? `No. ${cakeNumber(submittedCakeObj)} · ${submittedCake.name}`
+                : undefined
+            }
+          />
+          <Row
+            label={copy.order.rowCream}
+            value={
+              submitted.cream ? creamCopy(copy, submitted.cream) : undefined
+            }
+          />
+          <Row
+            label={copy.order.rowTaste}
+            value={
+              submitted.taste ? tasteCopy(copy, submitted.taste) : undefined
+            }
+          />
           <Row
             label={copy.order.rowFinish}
             value={
@@ -195,10 +221,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           <Row
             label={copy.order.rowDate}
             value={formatDate(submitted.date, locale)}
-          />
-          <Row
-            label={copy.order.rowQuote}
-            value={formatPrice(submitted.total, locale)}
           />
         </dl>
         {submitted.inscription && (
@@ -287,17 +309,36 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             <p className="mt-2 mb-6 text-sm text-muted-foreground">
               {copy.order.howManyLead}
             </p>
+            <p className="mb-2 text-sm font-medium text-foreground">
+              {copy.order.sizeSingle}
+            </p>
             <div className="grid gap-2" role="radiogroup">
-              {SIZES.map((s) => {
+              {SINGLE_TIER_SIZES.map((s) => {
                 const size = sizeCopy(copy, s.id);
                 return (
                   <ChoiceCard
                     key={s.id}
                     selected={draft.size === s.id}
                     onSelect={() => setDraft({ size: s.id as SizeId })}
-                    title={`${size.label} · ${size.servings}`}
-                    hint={size.hint}
-                    aside={formatPrice(sizePrice(s.id), locale)}
+                    title={size.label}
+                    hint={size.cm ? `${size.cm} · ${size.servings}` : size.servings}
+                  />
+                );
+              })}
+            </div>
+            <p className="mt-6 mb-2 text-sm font-medium text-foreground">
+              {copy.order.sizeTiered}
+            </p>
+            <div className="grid gap-2" role="radiogroup">
+              {TIERED_SIZES.map((s) => {
+                const size = sizeCopy(copy, s.id);
+                return (
+                  <ChoiceCard
+                    key={s.id}
+                    selected={draft.size === s.id}
+                    onSelect={() => setDraft({ size: s.id as SizeId })}
+                    title={size.label}
+                    hint={size.servings}
                   />
                 );
               })}
@@ -308,10 +349,10 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
         {step === 2 && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
-              {copy.order.flavors}
+              {copy.order.design}
             </legend>
             <p className="mt-2 mb-4 text-sm text-muted-foreground">
-              {copy.order.flavorsLead}
+              {copy.order.designLead}
             </p>
             <div className="mb-4 flex gap-2 overflow-x-auto pb-1">
               {(["all", ...CATEGORY_IDS] as const).map((id) => (
@@ -371,6 +412,79 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
         {step === 3 && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
+              {copy.order.taste}
+            </legend>
+            <p className="mt-2 mb-6 text-sm text-muted-foreground">
+              {copy.order.tasteLead}
+            </p>
+            <p className="mb-2 text-sm font-medium text-foreground">
+              {copy.order.creamLabel}
+            </p>
+            <div className="grid grid-cols-3 gap-2" role="radiogroup">
+              {CREAM_TYPES.map((c) => {
+                const selected = draft.cream === c.id;
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={selected}
+                    onClick={() =>
+                      setDraft({ cream: c.id as CreamId, taste: null })
+                    }
+                    className={cn(
+                      "rounded-lg border px-3 py-3 text-sm transition-[border-color,background-color] duration-150",
+                      selected
+                        ? "border-foreground bg-card font-medium text-foreground"
+                        : "border-border text-muted-foreground hover:border-foreground/35 hover:text-foreground",
+                    )}
+                  >
+                    {creamCopy(copy, c.id)}
+                  </button>
+                );
+              })}
+            </div>
+            {draft.cream && (
+              <div
+                className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3"
+                role="radiogroup"
+              >
+                {CREAM_FLAVORS[draft.cream].map((t) => {
+                  const selected = draft.taste === t.id;
+                  const note = tasteNoteCopy(copy, t.note);
+                  return (
+                    <button
+                      key={t.id}
+                      type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      onClick={() => setDraft({ taste: t.id })}
+                      className={cn(
+                        "rounded-lg border px-3 py-3 text-left transition-[border-color,background-color] duration-150",
+                        selected
+                          ? "border-foreground bg-card"
+                          : "border-border hover:border-foreground/35",
+                      )}
+                    >
+                      <span className="block text-sm font-medium text-foreground">
+                        {tasteCopy(copy, t.id)}
+                      </span>
+                      {note && (
+                        <span className="mt-0.5 block text-xs text-muted-foreground">
+                          {note}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </fieldset>
+        )}
+
+        {step === 4 && (
+          <fieldset>
+            <legend className="font-display text-title text-foreground">
               {copy.order.finish}
             </legend>
             <p className="mt-2 mb-6 text-sm text-muted-foreground">
@@ -386,11 +500,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                     onSelect={() => setDraft({ finish: f.id as FinishId })}
                     title={finish.label}
                     hint={finish.hint}
-                    aside={
-                      f.extra
-                        ? `+${formatPrice(f.extra, locale)}`
-                        : copy.order.included
-                    }
                   />
                 );
               })}
@@ -398,7 +507,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 4 && (
+        {step === 5 && (
           <div>
             <h2 className="font-display text-title text-foreground">
               {copy.order.yourDay}
@@ -554,11 +663,23 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             }
           />
           <Row
-            label={copy.order.rowFlavor}
+            label={copy.order.rowDesign}
             value={
               flavorCake && flavorText
                 ? `No. ${cakeNumber(flavorCake)} · ${flavorText.name}`
                 : copy.order.unset
+            }
+          />
+          <Row
+            label={copy.order.rowCream}
+            value={
+              draft.cream ? creamCopy(copy, draft.cream) : copy.order.unset
+            }
+          />
+          <Row
+            label={copy.order.rowTaste}
+            value={
+              draft.taste ? tasteCopy(copy, draft.taste) : copy.order.unset
             }
           />
           <Row
@@ -574,12 +695,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             value={interpolate(copy.collection.leadDays, { n: lead })}
           />
         </dl>
-        <p className="mt-5 border-t border-border pt-4 font-display text-2xl text-foreground tabular-nums">
-          {total ? formatPrice(total, locale) : "—"}
-        </p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          {copy.order.estimateNote}
-        </p>
       </aside>
     </div>
   );
