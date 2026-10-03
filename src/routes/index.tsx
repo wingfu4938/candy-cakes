@@ -2,7 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { CakeImage } from "@/components/cake-image";
 import { Button } from "@/components/ui/button";
-import { CAKES, FEATURED_SLUGS } from "@/lib/catalog";
+import { CAKES, FEATURED_SLUGS, VISIT } from "@/lib/catalog";
 import { useCopy } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -113,6 +113,47 @@ function Home() {
             {copy.home.allCakes}
             <ArrowRight className="size-4" />
           </Link>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-card">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-2 md:px-8 md:py-24">
+          <div>
+            <p className="font-sans text-xs tracking-kicker text-muted-foreground uppercase">
+              {copy.home.visitKicker}
+            </p>
+            <h2 className="mt-3 font-display text-title text-foreground">
+              {copy.home.visitTitle}
+            </h2>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+              {copy.home.visitLead}
+            </p>
+            <p className="mt-4 text-sm font-medium text-foreground">
+              {copy.footer.address}
+            </p>
+            <a
+              className="mt-2 inline-flex items-center gap-1 text-sm text-foreground underline-offset-4 hover:underline"
+              href={VISIT.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {copy.footer.directions}
+              <ArrowRight className="size-4" />
+            </a>
+          </div>
+          <dl className="space-y-0 divide-y divide-border border-y border-border">
+            {copy.footer.hours.map((row) => (
+              <div
+                key={row.day}
+                className="flex items-center justify-between py-3.5"
+              >
+                <dt className="text-sm text-muted-foreground">{row.day}</dt>
+                <dd className="text-sm font-medium text-foreground">
+                  {row.time}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
