@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CakeImage } from "@/components/cake-image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CAKES, SINGLE_TIER_SIZES, TIERED_SIZES, cakeNumber, getCake } from "@/lib/catalog";
+import { CAKES, SINGLE_TIER_SIZES, TIERED_SIZES, VISIT, cakeNumber, getCake } from "@/lib/catalog";
 import { sizeCopy, useCopy } from "@/lib/i18n";
 
 export const Route = createFileRoute("/collection/$slug")({
@@ -119,7 +119,7 @@ function CakeDetail() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/visit">{copy.collection.talk}</Link>
+              <a href={VISIT.facebook} target="_blank" rel="noopener noreferrer">{copy.collection.talk}</a>
             </Button>
           </div>
         </div>
