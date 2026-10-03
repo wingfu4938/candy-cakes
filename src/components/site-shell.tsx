@@ -17,8 +17,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const nav = [
     { to: "/collection" as const, label: copy.nav.collection },
     { to: "/order" as const, label: copy.nav.order },
-    { to: "/atelier" as const, label: copy.nav.atelier },
-    { to: "/visit" as const, label: copy.nav.visit },
   ];
 
   return (
@@ -93,18 +91,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
           <div>
             <p className="font-sans text-xs tracking-kicker text-muted-foreground uppercase">
-              {copy.footer.atelier}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-foreground">
-              {copy.visit.address}
-              <br />
-              {copy.visit.hours}
-              <br />
-              {copy.visit.note}
-            </p>
-          </div>
-          <div>
-            <p className="font-sans text-xs tracking-kicker text-muted-foreground uppercase">
               {copy.footer.book}
             </p>
             <p className="mt-3 text-sm leading-relaxed">
@@ -123,9 +109,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </Link>
               <Link to="/order" search={{}} className="hover:text-foreground">
                 {copy.nav.order}
-              </Link>
-              <Link to="/atelier" className="hover:text-foreground">
-                {copy.nav.atelier}
               </Link>
             </div>
           </div>
