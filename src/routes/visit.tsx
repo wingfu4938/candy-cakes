@@ -70,13 +70,7 @@ function Visit() {
             <dt className="text-muted-foreground">{copy.visit.contactLabel}</dt>
             <dd className="mt-3 flex flex-wrap gap-2">
               <Button asChild>
-                <a
-                  href={VISIT.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {copy.chat.facebookCta}
-                </a>
+                <a href={VISIT.facebook}>{copy.chat.facebookCta}</a>
               </Button>
             </dd>
           </div>
