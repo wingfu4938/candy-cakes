@@ -40,19 +40,20 @@ export type CakeSize = {
 
 export const SIZES: CakeSize[] = [
   { id: "5", group: "single", label: "5 inch", servings: "feeds about 2 people", cm: "14cm" },
-  { id: "6", group: "single", label: "6 inch", servings: "feeds about 3-6 people", cm: "16cm" },
+  { id: "6", group: "single", label: "6 inch", servings: "feeds about 4-8 people", cm: "16cm" },
   { id: "8", group: "single", label: "8 inch", servings: "feeds about 8-15 people", cm: "20cm" },
-  { id: "10", group: "single", label: "10 inch", servings: "feeds about 15-25 people", cm: "25cm" },
-  { id: "12", group: "single", label: "12 inch", servings: "feeds about 20-30 people", cm: "30cm" },
+  { id: "10", group: "single", label: "10 inch", servings: "feeds about 20-25 people", cm: "25cm" },
+  { id: "12", group: "single", label: "12 inch", servings: "feeds about 25-35 people", cm: "30cm" },
   { id: "5+8", group: "tiered", label: "5+8 inch", servings: "feeds about 10-18 people" },
   { id: "6+6", group: "tiered", label: "6+6 inch", servings: "feeds about 10-15 people" },
-  { id: "6+8", group: "tiered", label: "6+8 inch", servings: "feeds about 12-20 people" },
-  { id: "6+10", group: "tiered", label: "6+10 inch", servings: "feeds about 18-26 people" },
-  { id: "8+10", group: "tiered", label: "8+10 inch", servings: "feeds about 10-18 people" },
-  { id: "8+12", group: "tiered", label: "8+12 inch", servings: "feeds about 30-45 people" },
+  { id: "6+8", group: "tiered", label: "6+8 inch", servings: "feeds about 18-25 people" },
+  { id: "6+10", group: "tiered", label: "6+10 inch", servings: "feeds about 22-35 people" },
+  { id: "8+10", group: "tiered", label: "8+10 inch", servings: "feeds about 30-40 people" },
+  { id: "8+12", group: "tiered", label: "8+12 inch", servings: "feeds about 35-50 people" },
   { id: "10+12", group: "tiered", label: "10+12 inch", servings: "feeds about 45-65 people" },
   { id: "5+8+12", group: "tiered", label: "5+8+12 inch", servings: "feeds about 45-65 people" },
-  { id: "6+8+10", group: "tiered", label: "6+8+10 inch", servings: "feeds about 40-60 people" },
+  { id: "5+8+10", group: "tiered", label: "5+8+10 inch", servings: "feeds about 40-60 people" },
+  { id: "6+8+10", group: "tiered", label: "6+8+10 inch", servings: "feeds about 45-65 people" },
   { id: "8+10+12", group: "tiered", label: "8+10+12 inch", servings: "feeds about 60-80 people" },
 ];
 
@@ -85,7 +86,6 @@ export const CREAM_FLAVORS: Record<CreamId, CreamFlavor[]> = {
     { id: "chocolate-cookies-cream", note: "sweet-or-salty" },
     { id: "salt-caramel", note: "almonds-option" },
     { id: "matcha" },
-    { id: "mocha-coffee" },
   ],
   "fresh-cream": [
     { id: "classic-plain" },
