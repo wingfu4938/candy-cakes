@@ -45,7 +45,6 @@ export const GALLERY: GalleryCake[] = [
   { slug: "baby-001", category: "baby", image: "/cakes/gallery/baby-001.jpg" },
   { slug: "pipe-003", category: "pipe", image: "/cakes/gallery/pipe-003.jpg" },
   { slug: "kids-004", category: "kids", image: "/cakes/gallery/kids-004.jpg" , theme: "princess" },
-  { slug: "kids-005", category: "kids", image: "/cakes/gallery/kids-005.jpg" , theme: "cartoon" },
   { slug: "cup-001", category: "cup", image: "/cakes/gallery/cup-001.jpg" },
   { slug: "pipe-004", category: "pipe", image: "/cakes/gallery/pipe-004.jpg" },
   { slug: "cre-001", category: "cre", image: "/cakes/gallery/cre-001.jpg" },
