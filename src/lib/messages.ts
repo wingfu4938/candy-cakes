@@ -305,6 +305,7 @@ const en: Messages = {
   themes: {
     cartoon: "Other cartoon IPs",
     videogame: "Video games",
+    minecraft: "Minecraft",
     princess: "Princess",
     sports: "Sports",
     cars: "Cars",
@@ -562,6 +563,7 @@ const zh: Messages = {
   themes: {
     cartoon: "其他卡通IP",
     videogame: "游戏",
+    minecraft: "我的世界",
     princess: "公主",
     sports: "运动",
     cars: "汽车/赛车",
