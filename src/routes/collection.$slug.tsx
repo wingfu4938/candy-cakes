@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CakeImage } from "@/components/cake-image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CAKES, SIZES, getCake, sizePrice } from "@/lib/catalog";
+import { CAKES, SIZES, cakeNumber, getCake, sizePrice } from "@/lib/catalog";
 import { sizeCopy, useCopy, useLocale } from "@/lib/i18n";
 import { formatPrice } from "@/lib/utils";
 
@@ -43,6 +43,7 @@ function CakeDetail() {
           <div className="flex flex-wrap gap-2">
             <Badge>{label}</Badge>
             {cake.theme && <Badge variant="outline">{copy.themes[cake.theme]}</Badge>}
+            <Badge variant="outline">No. {cakeNumber(cake)}</Badge>
           </div>
           <h1 className="mt-4 font-display text-display text-foreground">
             {label}
