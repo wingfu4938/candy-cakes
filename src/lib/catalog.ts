@@ -80,6 +80,12 @@ export function getCake(slug: string) {
   return CAKES.find((c) => c.slug === slug);
 }
 
+/** Display number derived from the slug, e.g. "kids-023" -> "023". */
+export function cakeNumber(cake: Cake): string {
+  const parts = cake.slug.split("-");
+  return parts[parts.length - 1];
+}
+
 export function cakesIn(category: CategoryId) {
   return CAKES.filter((c) => c.category === category);
 }
