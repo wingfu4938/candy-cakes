@@ -7,6 +7,10 @@ export type SizeGroup = "single" | "tiered";
 export type FlavorId = string;
 export type CreamId = "cheese-mousse" | "fresh-cream" | "butter-cream";
 
+/** Keys for the order wizard steps. When a design is prefilled (from a cake
+ * detail page), the "design" step is skipped. */
+export type OrderStepKey = "size" | "design" | "flavor" | "contact";
+
 export type Cake = GalleryCake;
 
 export const CATEGORY_IDS: CategoryId[] = [
