@@ -10,21 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AtelierRouteImport } from './routes/atelier'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as OrderRouteImport } from './routes/order'
-import { Route as VisitRouteImport } from './routes/visit'
 import { Route as CollectionIndexRouteImport } from './routes/collection.index'
 import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AtelierRoute = AtelierRouteImport.update({
-  id: '/atelier',
-  path: '/atelier',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionRoute = CollectionRouteImport.update({
@@ -35,11 +28,6 @@ const CollectionRoute = CollectionRouteImport.update({
 const OrderRoute = OrderRouteImport.update({
   id: '/order',
   path: '/order',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VisitRoute = VisitRouteImport.update({
-  id: '/visit',
-  path: '/visit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionIndexRoute = CollectionIndexRouteImport.update({
@@ -55,61 +43,44 @@ const CollectionSlugRoute = CollectionSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/atelier': typeof AtelierRoute
   '/collection': typeof CollectionRouteWithChildren
   '/order': typeof OrderRoute
-  '/visit': typeof VisitRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection/': typeof CollectionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/atelier': typeof AtelierRoute
   '/order': typeof OrderRoute
-  '/visit': typeof VisitRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection': typeof CollectionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/atelier': typeof AtelierRoute
   '/collection': typeof CollectionRouteWithChildren
   '/order': typeof OrderRoute
-  '/visit': typeof VisitRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection/': typeof CollectionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/atelier'
-    | '/collection'
-    | '/order'
-    | '/visit'
-    | '/collection/$slug'
-    | '/collection/'
+    '/' | '/collection' | '/order' | '/collection/$slug' | '/collection/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    '/' | '/atelier' | '/order' | '/visit' | '/collection/$slug' | '/collection'
+  to: '/' | '/order' | '/collection/$slug' | '/collection'
   id:
     | '__root__'
     | '/'
-    | '/atelier'
     | '/collection'
     | '/order'
-    | '/visit'
     | '/collection/$slug'
     | '/collection/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AtelierRoute: typeof AtelierRoute
   CollectionRoute: typeof CollectionRouteWithChildren
   OrderRoute: typeof OrderRoute
-  VisitRoute: typeof VisitRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -119,13 +90,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/atelier': {
-      id: '/atelier'
-      path: '/atelier'
-      fullPath: '/atelier'
-      preLoaderRoute: typeof AtelierRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collection': {
@@ -140,13 +104,6 @@ declare module '@tanstack/react-router' {
       path: '/order'
       fullPath: '/order'
       preLoaderRoute: typeof OrderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/visit': {
-      id: '/visit'
-      path: '/visit'
-      fullPath: '/visit'
-      preLoaderRoute: typeof VisitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collection/': {
@@ -182,10 +139,8 @@ const CollectionRouteWithChildren = CollectionRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AtelierRoute: AtelierRoute,
   CollectionRoute: CollectionRouteWithChildren,
   OrderRoute: OrderRoute,
-  VisitRoute: VisitRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

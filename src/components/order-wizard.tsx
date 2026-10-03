@@ -33,7 +33,7 @@ import {
   useLocale,
 } from "@/lib/i18n";
 import { type Commission, useOrderStore } from "@/lib/order-store";
-import { notifyOrderFn } from "@/lib/notify-order.server";
+import { notifyOrderFn } from "@/lib/notify-order";
 import { cn } from "@/lib/utils";
 
 function ChoiceCard({

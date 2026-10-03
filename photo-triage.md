@@ -1,0 +1,243 @@
+# 蛋糕照片文字分拣报告
+
+> 2026-10-04 人工逐张检查，共 231 张 .jpg
+> 判定标准：蛋糕（含蛋糕板/底座）上有清晰可读的人名、昵称、年龄+名字组合等个性化文字 → 需要 P 掉；
+> 仅有通用祝福语（Happy Birthday、生日快乐、Boy or Girl、MOM 等泛称）或无文字 → 不用处理。
+> 注：单独的年龄数字（如 18、60）若无名字搭配，视为通用装饰，不列入 P 掉范围。
+
+## 需要P掉名字（共128张）
+
+- baby-004：粉色牌子上有名字 KASHVI，顶部还有 Happy Birthday 插牌和数字1
+- baby-005：下层粉色牌子上有旁遮普语名字（Arnaaz Dhillon 音译），顶部 Happy Birthday 插牌和数字1
+- baby-006：蓝色 Boss Baby 主题蛋糕，正面 BABY BOSS TEGH，底座 HALF WAY TO ONE TEGH，名字 Tegh
+- baby-007：下层木牌上有名字 IYAAN，顶部数字1
+- baby-009：独角兽蛋糕，底座粉色牌子上有名字 AMANAT，顶部 Happy Birthday 插牌和数字1
+- baby-011：草莓蛋糕，蛋糕板底座上手写 Welcome Teghbir Singh（名字 Teghbir Singh，写在蛋糕板上）
+- baby-013：Hello Kitty 蛋糕，底座粉色牌子上有名字 ARZOO，顶部 Happy Birthday 插牌和数字1
+- baby-014：丛林动物蛋糕，木牌上有名字 AKAAAL，HAPPY BIRTHDAY 小木牌，数字1
+- baby-017：粉色蛋糕，底座粉色牌子上有黑色字母名字 GUNRAM，顶部数字1和 Happy Birthday 插牌
+- baby-019：粉色半岁蛋糕，底座牌子上手写体名字 Harsaanjh Kaur，顶部 HALF WAY TO ONE 插牌
+- baby-020：粉紫色小仙女双层蛋糕，底座上有名字 ASHLYNN KAUR，数字1和 Happy Birthday 装饰
+- boss-003：藏青金色蛋糕，顶部横幅 Happy Birthday Ankur（名字 Ankur），金色数字40
+- boss-007：金钱主题蛋糕，底部黑色横幅 Happy Birthday Yhan（名字 Yhan）
+- boss-008：黑白金蛋糕，顶部金色数字35，底部横幅 Harsh unlocked level 35（名字 Harsh + 年龄35）
+- boss-009：榴莲蓝莓蛋糕，黑色横幅 Happy Birthday Tee（名字 Tee），另有 Luky、Happy 小牌子疑似昵称
+- boss-010：巧克力蛋糕，底部横幅 LUIS（名字 Luis），顶部 21st
+- boss-012：金钱主题蛋糕，底座黑色字母 GEORGE（名字 George），一夜暴富牌子
+- boss-013：灰色金钱蛋糕，顶部黑色字母 AMRIT（名字 Amrit），黑色数字21
+- cre-001：老友记紫色蛋糕，顶部插牌 THE ONE WHERE PASANG TURNS 30（名字 Pasang + 30岁）
+- cre-002：海洋主题蛋糕，贝壳牌子上有名字 ANTONIA，顶部数字19
+- cre-004：白底红心蛋糕，底座上手写 HAPPY BIRTHDAY CHEA PHAT（名字 Chea Phat）
+- cre-005：黑白金蛋糕，底座黑色缎带上 TWENTY FINE SHEREEN（名字 Shereen + 25岁），皇冠装饰
+- cre-007：黄色星星帽卡通蛋糕，底座黄色字母 STELLA（名字 Stella）
+- cre-008：同上另一角度，底座 STELLA（名字 Stella）
+- cre-010：奥利奥小怪兽蛋糕，底座手写 Happy 10th Birthday Thomas（名字 Thomas + 10岁）
+- cre-016：健身主题蛋糕，底座黑色字母 KANNU（名字 Kannu），顶部 Happy Birthday 插牌
+- cre-019：红心蛋糕，顶部黑色字母疑似名字 RIYA，底座 HAPPY B'DAY SHANAYA（疑似名字 Shanaya，字迹较粗需P掉）
+- cre-020：蜡笔小新屁屁蛋糕，顶部中文"祝十八岁…生日快乐"，底座"亲爱的大文文"（昵称大文文 + 18岁）
+- cre-021：国际象棋蛋糕，顶部黑色字母 ACHILLES（名字 Achilles），底座 HAPPY BIRTHDAY
+- cup-001：足球主题纸杯蛋糕，足球装饰上有名字 VICHEA 和 PISETH，另有 Congratulations
+- fresh-001：草莓蛋糕，底座黑色手写 Happy Birthday WEI（名字 Wei）
+- fresh-002：雏菊蛋糕，顶部粉色手写体 Happy Birthday Annalisa（名字 Annalisa）
+- fresh-003：玫瑰蛋糕，白色数字23，底座粉色缎带 HUONG PUTHIKA（名字 Huong Puthika + 23岁）
+- fresh-006：草莓玫瑰蛋糕，底座黑色手写 Happy Birthday WEI（名字 Wei），顶部 Happy Birthday 小牌
+- fruit-004：雏菊蛋糕，顶部金色 Happy 30th，底座手写 Happy Birthday Linh（名字 Linh + 30岁）
+- fruit-013：草莓蛋糕，底座黑色手写 Happy Birthday KK姐姐（昵称KK + 姐姐）
+- fruit-015：巧克力淋面水果蛋糕，底座红色爱心旁有天城体（印地语）名字，疑似 Ganga
+- fruit-023：芒果蛋糕，正面蓝色立体字生日快乐 MAX 13（名字 Max + 13岁），HAPPY BIRTHDAY 小旗
+- kids-001：三丽鸥粉色蛋糕，蝴蝶结牌子上有名字 SOPANHA 和数字9
+- kids-002：K-pop 紫色蛋糕，紫色花体字名字 Amber（字迹花哨），数字6，底座 Happy Birthday
+- kids-003：Huntrix 紫色蛋糕，正面 ERICA（名字 Erica）和数字5
+- kids-004：粉色仙女蝴蝶双层蛋糕，粉色牌子 Harjind Kaur（名字），圆形徽章数字2
+- kids-006：我的世界蛋糕，正面绿色立体字 5 AARON（名字 Aaron + 5岁），顶部 HAPPY BIRTHDAY
+- kids-007：小火车蛋糕，热气球上 Yolo六岁生日快乐（昵称 Yolo + 6岁）
+- kids-008：粉色我的世界蛋糕，红色横幅 ADELE JOY（名字 Adele Joy），数字5
+- kids-010：鬼灭之刃甘露寺蛋糕，粉色牌子 Elise（名字 Elise），数字9
+- kids-011：丛林动物蛋糕，蓝色立体字 ARJAN（名字 Arjan），数字2
+- kids-012：足球蛋糕，黑色字母 ASIM JAN（名字 Asim Jan），数字2
+- kids-014：冰雪奇缘艾莎蛋糕，蓝色字母 JASMIN（名字 Jasmin），圆形徽章数字5
+- kids-015：超级马里奥蛋糕，底座绿色字母 UMARRAJ（名字 Umarraj），数字8
+- kids-016：Ben & Holly 小王国蛋糕，底座粉色字母 BRIELLA（名字 Briella），数字4
+- kids-017：蓝色糖果蛋糕，底座蓝色字母 LIAM（名字 Liam）
+- kids-018：粉红猪小妹花朵蛋糕，底座粉色字母 ALAINA（名字 Alaina），数字3
+- kids-019：苏菲亚公主蛋糕，底座紫色字母 GURSIFAT（名字 Gursifat），皇冠牌子上有旁遮普语名字，数字5
+- kids-020：变形金刚蛋糕，黑色横幅名字 VIAAN（部分被擎天柱遮挡），数字7
+- kids-021：粉红猪小妹彩虹蛋糕，底座粉色字母 ALAINA（名字 Alaina），数字3
+- kids-023：花朵蛋糕，底座粉色字母 Inayat is Two sweet（名字 Inayat + 2岁）
+- kids-024：鲨鱼蛋糕，底座黑色字母 Leo is TWO sweet（名字 Leo + 2岁）
+- kids-025：仙女城堡双层蛋糕，底座粉色牌子 AMBAR（名字 Ambar），圆形徽章数字2
+- kids-026：阿根廷足球蛋糕，黑色横幅 Happy Birthday Sovan（名字 Sovan）
+- kids-027：乐高幻影忍者蛋糕，顶部横幅 DILBAGH（名字 Dilbagh），底座 HAPPY BIRTHDAY
+- kids-028：公主彩虹蛋糕，底座彩色字母 GURSIFAT（名字 Gursifat）
+- kids-029：K-pop 猎魔团蛋糕，底座牌子 Happy Brithday Amber（名字 Amber，拼写有误），数字6
+- kids-030：马达加斯加方形蛋糕，黄色牌子 Rudra turning 2（名字 Rudra + 2岁），侧面 Happy Birthday
+- kids-031：超级马里奥蛋糕，底座绿色字母 WILLIAM（名字 William），数字8
+- kids-034：Roblox 蛋糕，顶部横幅 HAPPY BIRTHDAY Manraj（名字 Manraj），数字9
+- kids-035：Saja Boys 紫色蛋糕，底座黑色手写 HAPPY BIRTHDAY ETHAN（名字 Ethan）
+- kids-036：Hello Kitty 彩虹蛋糕，粉色字母 LUNA（名字 Luna），数字4
+- kids-037：游泳池蛋糕，底座牌子 National Age bro!（疑似客户昵称），数字13，侧面 HAPPY Birthday
+- kids-038：K-pop 紫色蛋糕，粉色横幅 AIRA（名字 Aira），数字9
+- kids-040：彩虹双层蛋糕，底座粉色字母 KYRA POWAR（名字 Kyra Powar），数字8
+- kids-041：草莓蛋糕，粉色字母 SKYE（名字 Skye），圆形徽章数字7
+- kids-042：梅西足球蛋糕，粉色横幅 AGAMVEER（名字 Agamveer），Happy Birthday
+- kids-043：小汽车蛋糕，底座黄色牌子 EVELYN（名字 Evelyn），数字3
+- kids-044：蝴蝶结双层蛋糕，底座粉色字母 CHLOE（名字 Chloe），圆形徽章数字12
+- kids-045：冰雪奇缘蛋糕，底座蓝色字母 MEHREEN（名字 Mehreen），圆形徽章5th
+- kids-047：冰雪奇缘蛋糕，顶部白色字母名字 GURSAA…（部分被蝴蝶结遮挡），数字4
+- kids-049：美人鱼爱丽儿蛋糕，底座粉色字母 NADYNE（名字 Nadyne），数字5
+- kids-052：美人鱼蛋糕，底座粉色字母 DEVANSHI（名字 Devanshi），Happy Birthday 圆形插牌
+- kids-053：彩虹蛋糕，底座彩色字母 AKSHITA（名字 Akshita），数字4
+- kids-054：小汽车蛋糕，底座彩色字母 AARAV（名字 Aarav），数字3
+- kids-055：K-pop 紫色蛋糕，粉色横幅 PANACHE（名字 Panache），数字5
+- kids-056：调色板蛋糕，蓝色牌子 Rudra turning 2（名字 Rudra + 2岁）
+- kids-058：冰雪奇缘蛋糕，底座浅蓝色字母 TIKA（名字 Tika，字迹较淡），数字4
+- kids-059：K-pop 紫色蛋糕，粉色横幅 SAMREEN（名字 Samreen），数字8
+- kids-060：我的世界蛋糕，底座黑色字母 EDWIN（名字 Edwin），白色 HAPPY BIRTHDAY
+- kids-061：库洛米紫色蛋糕，底座粉色手写 Happy 1st Birthday Elena ♡ we love you（名字 Elena + 1岁）
+- kids-062：海洋双层蛋糕，底座蓝色字母 RABAAP SINGH（名字 Rabaap Singh），数字3
+- kids-064：Boss Baby 蛋糕，粉色牌子 Celebration of Life Em & Zia（名字 Em 和 Zia）
+- kids-065：小黄人蛋糕，白色牌子黑色字母 SOLIM（名字 Solim），HAPPY BIRTHDAY 插牌
+- kids-066：兰博基尼蛋糕，黑色横幅 Happy 5th Birthday Harnidh（名字 Harnidh + 5岁）
+- kids-067：草莓雏菊蛋糕，底座黄色手写 Happy 2nd Birthday Seerat（名字 Seerat + 2岁，字迹稍模糊）
+- kids-068：闪电麦昆蛋糕，红色横幅 FELIX（名字 Felix），数字5，黄色 HAPPY BIRTHDAY
+- kids-069：粉色仙女蛋糕，底座粉色字母 SEERAT（名字 Seerat），数字2
+- kids-071：玉桂狗蓝色蛋糕，底座白色字母 MILA（名字 Mila），数字7
+- kids-072：库洛米粉色蛋糕，粉色横幅 INAYAT（名字 Inayat），数字5
+- kids-074：奶牛雏菊蛋糕，粉色牌子 AVIRA（名字 Avira），数字2
+- kids-075：漫画风蛋糕，底座粉色手写 Happy 10th Birthday Amber! we love you!（名字 Amber + 10岁）
+- kids-076：我的世界蛋糕，绿色字母 7 TIM（名字 Tim + 7岁）
+- kids-077：Hello Kitty 蛋糕，黄色横幅 AMAIRA（名字 Amaira）
+- kids-078：篮球蛋糕，底座黑色字母 BENJAMIN（名字 Benjamin），数字9
+- kids-079：鲨鱼蛋糕，底座黑色字母 Avah is TWO sweet（名字 Avah + 2岁），数字2
+- kids-080：乒乓球蛋糕，顶部牌子 LOGAN（名字 Logan），数字12，HAPPY BIRTHDAY
+- kids-081：蜘蛛侠蛋糕，金色字母 REON（名字 Reon），底座 HAPPY 2ND BIRTHDAY
+- kids-082：超级马里奥蛋糕，黑色横幅 Happy Birthday Super Zayne（名字 Zayne），数字7
+- kids-083：Baby Shark 蛋糕，金色字母 TAVLEEN（名字 Tavleen），数字3
+- kids-085：汪汪队蛋糕，蓝色字母 JAYDEN（名字 Jayden），数字4
+- kids-087：LOL 惊喜娃娃蛋糕，字母积木拼出 ERINKA（名字 Erinka），数字6，Happy Birthday 牌子
+- lady-001：财神蛋糕，底座金色缎带 KATHNISS（名字 Kathniss），Happy Birthday 插牌
+- lady-002：金色珍珠蛋糕，底座黑色手写 HAPPY BIRTHDAY DEV（名字 Dev）
+- pipe-002：蝴蝶蛋糕，白色牌子金色字母 MALSHA（名字 Malsha）
+- pipe-003：蓝色蝴蝶结蛋糕，徽章上 our lovely daughter and big sister Alyson（名字 Alyson），Happy birthday 圆形插牌
+- pipe-004：白色简约蛋糕，顶部黑色手写 Happy Birthday JAG（名字 Jag）
+- pipe-007：玫瑰花蛋糕，底座黑色手写 Moms Aryan Archana（名字 Aryan、Archana）
+- pipe-008：花朵蛋糕，底座粉色字母 LUCKY（昵称 Lucky），Happy Birthday 插牌
+- pipe-010：玫瑰蛋糕，底座粉色手写 Happy Birthday lucky（昵称 lucky）
+- pipe-013：玫瑰蛋糕，底座楠楠 Happy Birthday（中文昵称楠楠）
+- pipe-016：红心蛋糕，底座黑色手写 Happy 50th Birthday，两侧各有一个 Yang（名字 Yang + 50岁）
+- pipe-017：白色蝴蝶蛋糕，底座金色缎带 Happy Birthday Demaira（名字 Demaira）
+- pipe-018：爱心玫瑰蛋糕，底座黑色手写 Happy Birthday Jashu（名字 Jashu）
+- pipe-026：草莓缎带蛋糕，底座粉色 Happy 16th Birthday Elea（名字 Elea + 16岁）
+- pipe-029：绿色小蛋糕，顶部白色手写 Happy Birthday to my Shirley（名字 Shirley）
+- pipe-030：蓝色蝴蝶蛋糕，顶部白色手写 Happy Birthday Nav（名字 Nav）
+- pipe-031：粉色缎带蛋糕，底座粉色字母 ABBY（名字 Abby），顶部 Happy Birthday
+- pipe-038：紫色芋泥蛋糕，底座紫色手写 Happy Birthday Violet（名字 Violet）
+- wed-002：三层婚礼蛋糕，底座金色手写 Manoz & Sunita（新人名字，部分被裁切但可辨认），M ♥ S 金色字母
+- wed-004：爱心周年蛋糕，底座周年快乐 江❤浒（新人姓氏江、浒），顶部 Happy Anniversary
+- wed-006：红心婚礼蛋糕，底座 Cheers to 25 years togetherness Mr. & Mrs. Bhullar（家族姓 Bhullar + 25周年）
+
+## 有通用文字但不用处理（共103张）
+
+- baby-001：顶部金色手写体 Oh Baby，无人名
+- baby-002：Stitch 主题，Boy or Girl? 性别揭晓文字，无人名
+- baby-003：粉色蛋糕，顶部数字1（周岁通用装饰），无名字
+- baby-008：顶部 Boy 插牌和婴儿服饰装饰，无人名
+- baby-010：纯白蛋糕，顶部金色 One 插牌，无人名
+- baby-012：蓝色双层蛋糕，BABY SHOWER 云朵牌子，无人名
+- baby-015：白色爱心蛋糕，顶部 Baby 花体字，无人名
+- baby-016：蓝色蛋糕数字1，底座 HAPPY BIRTHDAY BABY 通用祝福（BABY为泛称非人名），无具体人名
+- baby-018：性别揭晓蛋糕，顶部 Boy or Girl? 插牌，无人名
+- baby-021：性别揭晓蛋糕，正面 BOY or Girl 金色字，无人名
+- boss-001：黑金家庭剪影蛋糕，正面 Husband 字样（泛称非人名），顶部 Happy Birthday 插牌
+- boss-002：中文祝福蛋糕，一家之主、福气、健康、生日快乐等通用祝福语，无人名
+- boss-004：钥匙房子蛋糕，底部横幅 HAPPY BIRTHDAY TO THE BEST MORTGAGE BROKER（职业泛称，无人名）
+- boss-006：白色蛋糕，顶部红色八方来财，底座 HAPPY BIRTHDAY，无人名
+- boss-011：威士忌主题蛋糕，顶部 Happy 18th（仅有年龄无名字，不具识别性），小牌 Happy Birthday
+- cre-003：粉色 Hello Kitty 蛋糕，底座中文老婆生日快乐（泛称无名）
+- cre-006：新西兰主题蛋糕（护照、国旗、银蕨），蓝色缎带 Congratulations mum and dad（泛称无名）
+- cre-009：小狗情侣蛋糕，底座中文祝福模糊不清（疑似"给最爱的你生日快乐"），无清晰人名
+- cre-011：大头儿子卡通蛋糕，顶部"你是我这里最靓的仔"，底座 HAPPY BIRTHDAY，无人名
+- cre-012：健身主题蛋糕，粉色 HAPPY birthday 字样，无人名
+- cre-013：星空海洋蛋糕，无文字
+- cre-014：蝴蝶蛋糕，顶部珍珠字母 MOM（泛称），无人名
+- cre-015：毕业蛋糕，HAPPY Graduation，无人名
+- cre-017：奥利奥蛋糕，底座 Happy Birthday Hubby（泛称），无人名
+- cre-018：欢迎蛋糕，顶部 DADI 填字（祖母泛称），底座 Welcome to NZ Dadi Dadu Bhaiya Fofia（均为亲属泛称无名）
+- cup-002：粉色纸杯蛋糕，部分有数字14，无人名
+- cup-003：纸杯蛋糕，thank you 插牌，无人名
+- cup-004：甜品杯（奥利奥/椒盐卷饼装饰），无文字
+- cup-005：草莓蛋糕配纸杯蛋糕，底座金色缎带文字被遮挡无法辨认，无清晰人名
+- cup-006：婴儿主题纸杯蛋糕（衣服/奶瓶装饰），无文字
+- fresh-004：玫瑰蛋糕，LOVE YOU Mum 插牌和 MOM 字母（泛称），无人名
+- fresh-005：白色雏菊蛋糕，顶部粉色 Happy Mother's Day Mummy（泛称），无人名
+- fruit-001：方形水果蛋糕，顶部 Happy Everyday Room14（房间号非人名），无人名
+- fruit-002：巧克力淋面水果蛋糕，Candy Cakes 店铺小 logo 牌，无客户文字
+- fruit-003：蓝白蛋糕，日文お誕生日おめでとう（生日快乐通用祝福），无人名
+- fruit-005：榴莲蓝莓蛋糕，金色 Happy Birthday 亚克力插牌，无人名
+- fruit-006：水果蛋糕，Happy Birthday 黑色手写体，底座 Happy 16th Birthday（仅有年龄无名字）
+- fruit-007：草莓蛋糕，LOVE IS ETERNAL 缎带（商业缎带），无客户文字
+- fruit-008：榴莲蛋糕，Happy Birthday 小牌，LOVE IS ETERNAL 缎带，无客户文字
+- fruit-009：榴莲蛋糕，无文字
+- fruit-010：榴莲蛋糕，金色 Happy Birthday 亚克力插牌，无人名
+- fruit-011：浆果爱心蛋糕，底座老婆生日快乐（泛称），无人名
+- fruit-012：粉色水果蛋糕，Oh Baby! 金色插牌，无人名
+- fruit-014：草莓蛋糕，底座妈妈生日快乐 我们爱你（泛称），无人名
+- fruit-016：榴莲蛋糕，金色 HAPPY Mothers DAY，无人名
+- fruit-017：草莓蛋糕，金色 Happy Birthday，无人名
+- fruit-018：草莓蛋糕，金色爸爸生日快乐插牌（泛称），无人名
+- fruit-019：草莓雏菊蛋糕，顶部 HAPPY Mother's 插牌，底座 WE LOVE YOU MUM（泛称），无人名
+- fruit-020：白色奶油蛋糕，底座英文励志语 Keep Shining 等，无人名
+- fruit-021：蓝莓蛋糕，顶部 Happy Birthday，蓝色發字（发财），无人名
+- fruit-022：草莓蛋糕，底座妈妈生日快乐 我们爱你（泛称），无人名
+- kids-009：乐高幻影忍者蛋糕，数字5，NINJAGO 和 HAPPY BIRTHDAY，无人名
+- kids-013：灰姑娘蛋糕，无清晰可读文字
+- kids-022：足球蛋糕，无文字
+- kids-032：宝可梦蛋糕，Pokemon 字样，底座疑似 HAPPY 6TH BIRTHDAY 字迹模糊无清晰人名
+- kids-033：粉红猪小妹蛋糕，数字3，无人名
+- kids-039：哆啦A梦蛋糕，数字9，happy Birthday 黑色手写体，无人名
+- kids-046：公主草莓蛋糕，底座金色生日快乐，无人名
+- kids-048：我的世界蛋糕，白色 HAPPY BIRTHDA（拼写少个Y），MINECRAFT 插牌，无人名
+- kids-050：宝可梦蛋糕，数字7，Pokemon 字样，无人名
+- kids-051：肌肉男孩卡通蛋糕，红色 Happy Birthday 手写体，无人名
+- kids-057：赛车+吊车蛋糕，Boy 路牌、HAPPY BIRTHDAY、ROUTE NO.1、数字3，无人名
+- kids-063：小汽车蛋糕，无文字
+- kids-070：黄油小熊蛋糕，Happy Birthday 字样，无人名
+- kids-073：贝壳蓝色蛋糕，数字10，底座 Happy Birthday Princess（泛称），无人名
+- kids-084：超级马里奥蛋糕，HAPPY BIRTHDAY 小旗，SUPER MARIO 字样，无人名
+- kids-086：丛林动物蛋糕，无文字
+- old-001：紫色芋泥蛋糕，顶部金色 Happy 60th，中文祝我最爱的妈妈健康长寿（泛称无名）
+- old-002：寿桃蛋糕，红色福字寿字，无人名
+- old-003：祝寿蛋糕，福寿字样，岁岁平安健康长寿对联，底座姥姥生日快乐（泛称），无人名
+- old-004：紫色蝴蝶蛋糕，无清晰可读人名
+- pipe-001：紫色蝴蝶蛋糕，无文字
+- pipe-005：小花蛋糕，顶部黑色 Happy Birthday 手写体，无人名
+- pipe-006：缎带蛋糕，顶部粉色 Happy Birthday Mummy（泛称），无人名
+- pipe-009：草莓缎带蛋糕，无清晰可读人名
+- pipe-011：白色爱心裱花蛋糕，无文字
+- pipe-012：白色简约蛋糕，顶部 Happy Birthday Habibi（Habibi 为阿拉伯语"亲爱的"泛称非人名）
+- pipe-014：蓝白撒糖蛋糕，蓝色 Happy Birthday 圆形插牌，无人名
+- pipe-015：粉色玫瑰蛋糕，金色 Happy Birthday Mama（泛称），无人名
+- pipe-019：紫色蛋糕，金色妈妈生日快乐插牌，love mum 字样（泛称），无人名
+- pipe-020：爱心花朵蛋糕，粉色 happy birthday 手写体，无人名
+- pipe-021：花朵蛋糕，金色 Thank You，无人名
+- pipe-022：紫色蝴蝶蛋糕，金色 Happy Birthday MOM 徽章（泛称），无人名
+- pipe-023：郁金香蛋糕，粉色 love mama（泛称），无人名
+- pipe-024：爱心珍珠蛋糕，底座 Happy 98 Birthday（仅有年龄无名字）
+- pipe-025：白色蛋糕，蓝色 hello twenty 手写体，无人名
+- pipe-027：玫瑰蛋糕，底座 Happy Birthday Mama（泛称），无人名
+- pipe-028：花朵蛋糕，金色 Happy Birthday 亚克力插牌，无人名
+- pipe-032：郁金香蛋糕，love you 字样，无人名
+- pipe-033：野花蛋糕，底座 Happy Birthday Babee（Babee 为 baby 变体泛称非人名）
+- pipe-034：粉白花朵蛋糕，白色 happy birthday 手写体，无人名
+- pipe-035：白底红心蛋糕，珍珠 MOM 字母，HAPPY Mother's DAY 插牌（泛称），无人名
+- pipe-036：紫色蛋糕，HAPPY Mother's 插牌，金色 LOVE YOU Mum，底座妈妈母亲快乐 阖家团圆（泛称），无人名
+- pipe-037：郁金香蛋糕，love mum 字样，Candy Cakes 店铺 logo 牌，无客户文字
+- pipe-039：白色蝴蝶蛋糕，顶部浅黄色 Happy Birthday 字样模糊，无人名
+- pipe-040：康乃馨蛋糕，LOVE YOU Mum 插牌，Happy Birthday 小牌，珍珠 MOM（泛称），无人名
+- pipe-041：紫色蛋糕，顶部健康喜乐 诸事胜意，无人名
+- pipe-042：玫瑰花环蛋糕，粉色 Happy Birthday 手写体，无人名
+- wed-001：白色蛋糕，Happy 11th Anniversary 黄蓝牌子，无人名
+- wed-003：花朵蛋糕，金色 HAPPY 2ND ANNIVERSARY，无人名
+- wed-005：浆果蛋糕，底座 Happy 1st Anniversary，无人名
+- wed-007：粉色爱心蛋糕，金色 Bride to Be，无人名
+- wed-008：白色蝴蝶结婚礼蛋糕，新人剪影插牌，无文字
