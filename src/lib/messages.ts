@@ -1,6 +1,7 @@
 import type {
   CategoryId,
   FinishId,
+  KidsThemeId,
   OccasionId,
   SizeId,
 } from "@/lib/catalog";
@@ -130,6 +131,7 @@ export type Messages = {
   };
   occasions: Record<OccasionId, { label: string; hint: string }>;
   categories: Record<CategoryId, string>;
+  themes: Record<KidsThemeId, string>;
   sizes: Record<SizeId, { label: string; servings: string; hint: string }>;
   finishes: Record<FinishId, { label: string; hint: string }>;
   atelier: {
@@ -393,6 +395,20 @@ const en: Messages = {
     cre: "Creative",
     wed: "Wedding & anniversary",
     cup: "Cupcakes",
+  },
+  themes: {
+    cartoon: "Other cartoon IPs",
+    videogame: "Video games",
+    princess: "Princess",
+    sports: "Sports",
+    cars: "Cars",
+    ocean: "Ocean",
+    frozen: "Frozen",
+    animals: "Animals",
+    superhero: "Superheroes",
+    pawpatrol: "Paw Patrol",
+    lolsurprise: "LOL Surprise dolls",
+    other: "Other",
   },
   sizes: {
     "4": {
@@ -728,6 +744,20 @@ const zh: Messages = {
     cre: "创意款",
     wed: "婚礼纪念款",
     cup: "杯子蛋糕",
+  },
+  themes: {
+    cartoon: "其他卡通IP",
+    videogame: "游戏",
+    princess: "公主",
+    sports: "运动",
+    cars: "汽车/赛车",
+    ocean: "海洋",
+    frozen: "冰雪奇缘",
+    animals: "小动物",
+    superhero: "超级英雄",
+    pawpatrol: "汪汪队",
+    lolsurprise: "LOL Surprise娃娃",
+    other: "其他",
   },
   sizes: {
     "4": { label: "4 寸", servings: "2–3 人", hint: "两个人，或一块试试。" },
