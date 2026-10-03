@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,35 +11,27 @@ import {
   CATEGORY_IDS,
   CREAM_FLAVORS,
   CREAM_TYPES,
-  FINISHES,
-  OCCASION_IDS,
   SINGLE_TIER_SIZES,
   TIERED_SIZES,
   cakeNumber,
   getCake,
   leadDaysFor,
-  occasionFor,
   type CategoryId,
   type CreamId,
-  type FinishId,
   type FlavorId,
-  type OccasionId,
   type SizeId,
 } from "@/lib/catalog";
 import {
   cakeCopy,
   creamCopy,
-  finishCopy,
   interpolate,
-  occasionCopy,
   sizeCopy,
   tasteCopy,
   tasteNoteCopy,
   useCopy,
-  useLocale,
 } from "@/lib/i18n";
 import { type Commission, useOrderStore } from "@/lib/order-store";
-import { cn, formatDate, toDateInput } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 function ChoiceCard({
   selected,
@@ -75,7 +67,6 @@ function ChoiceCard({
 
 export function OrderWizard({ prefills }: { prefills?: string }) {
   const copy = useCopy();
-  const locale = useLocale();
   const draft = useOrderStore((s) => s.draft);
   const setDraft = useOrderStore((s) => s.setDraft);
   const submitCommission = useOrderStore((s) => s.submitCommission);
@@ -88,19 +79,11 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (!prefills) return;
     const cake = getCake(prefills);
     if (!cake) return;
-    setDraft({
-      flavor: cake.slug,
-      occasion: occasionFor(cake.category),
-    });
+    setDraft({ flavor: cake.slug });
     setStyleFilter(cake.category);
   }, [prefills, setDraft]);
 
   const lead = leadDaysFor(draft);
-  const minDate = useMemo(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + lead);
-    return toDateInput(d);
-  }, [lead]);
 
   const flavorCake = draft.flavor ? getCake(draft.flavor) : undefined;
   const flavorText = flavorCake ? cakeCopy(copy, flavorCake.slug) : undefined;
@@ -109,12 +92,10 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
   function next() {
     const current = useOrderStore.getState().draft;
     const e: string[] = [];
-    if (step === 0 && !current.occasion) e.push(copy.order.errOccasion);
-    if (step === 1 && !current.size) e.push(copy.order.errSize);
-    if (step === 2 && !current.flavor) e.push(copy.order.errDesign);
-    if (step === 3 && !current.cream) e.push(copy.order.errCream);
-    if (step === 3 && !current.taste) e.push(copy.order.errTaste);
-    if (step === 4 && !current.finish) e.push(copy.order.errFinish);
+    if (step === 0 && !current.size) e.push(copy.order.errSize);
+    if (step === 1 && !current.flavor) e.push(copy.order.errDesign);
+    if (step === 2 && !current.cream) e.push(copy.order.errCream);
+    if (step === 2 && !current.taste) e.push(copy.order.errTaste);
     if (e.length) {
       setErrors(e);
       return;
@@ -128,17 +109,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     const e: string[] = [];
     if (!current.name.trim()) e.push(copy.order.errName);
     if (!/^[\d\s+-]{8,}$/.test(current.phone.trim())) e.push(copy.order.errPhone);
-    if (!current.date) e.push(copy.order.errDate);
-    if (current.date && current.date < minDate) {
-      e.push(
-        interpolate(copy.order.errLead, {
-          n: lead,
-          date: formatDate(minDate, locale),
-        }),
-      );
-    }
     if (
-      !current.occasion ||
       !current.size ||
       !current.flavor ||
       !current.cream ||
@@ -177,14 +148,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
         </p>
         <dl className="mt-8 grid gap-3 border-t border-border pt-6 text-sm sm:grid-cols-2">
           <Row
-            label={copy.order.rowOccasion}
-            value={
-              submitted.occasion
-                ? occasionCopy(copy, submitted.occasion).label
-                : undefined
-            }
-          />
-          <Row
             label={copy.order.rowSize}
             value={
               submitted.size ? sizeCopy(copy, submitted.size).label : undefined
@@ -209,18 +172,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             value={
               submitted.taste ? tasteCopy(copy, submitted.taste) : undefined
             }
-          />
-          <Row
-            label={copy.order.rowFinish}
-            value={
-              submitted.finish
-                ? finishCopy(copy, submitted.finish).label
-                : undefined
-            }
-          />
-          <Row
-            label={copy.order.rowDate}
-            value={formatDate(submitted.date, locale)}
           />
         </dl>
         {submitted.inscription && (
@@ -279,31 +230,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
         {step === 0 && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
-              {copy.order.forWhom}
-            </legend>
-            <p className="mt-2 mb-6 text-sm text-muted-foreground">
-              {copy.order.forWhomLead}
-            </p>
-            <div className="grid gap-2" role="radiogroup">
-              {OCCASION_IDS.map((id) => {
-                const o = occasionCopy(copy, id);
-                return (
-                  <ChoiceCard
-                    key={id}
-                    selected={draft.occasion === id}
-                    onSelect={() => setDraft({ occasion: id as OccasionId })}
-                    title={o.label}
-                    hint={o.hint}
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
-        )}
-
-        {step === 1 && (
-          <fieldset>
-            <legend className="font-display text-title text-foreground">
               {copy.order.howMany}
             </legend>
             <p className="mt-2 mb-6 text-sm text-muted-foreground">
@@ -346,7 +272,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 2 && (
+        {step === 1 && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
               {copy.order.design}
@@ -409,7 +335,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 3 && (
+        {step === 2 && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
               {copy.order.taste}
@@ -482,41 +408,11 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 4 && (
-          <fieldset>
-            <legend className="font-display text-title text-foreground">
-              {copy.order.finish}
-            </legend>
-            <p className="mt-2 mb-6 text-sm text-muted-foreground">
-              {copy.order.finishLead}
-            </p>
-            <div className="grid gap-2" role="radiogroup">
-              {FINISHES.map((f) => {
-                const finish = finishCopy(copy, f.id);
-                return (
-                  <ChoiceCard
-                    key={f.id}
-                    selected={draft.finish === f.id}
-                    onSelect={() => setDraft({ finish: f.id as FinishId })}
-                    title={finish.label}
-                    hint={finish.hint}
-                  />
-                );
-              })}
-            </div>
-          </fieldset>
-        )}
-
-        {step === 5 && (
+        {step === 3 && (
           <div>
             <h2 className="font-display text-title text-foreground">
-              {copy.order.yourDay}
+              {copy.order.contact}
             </h2>
-            <p className="mt-2 mb-6 text-sm text-muted-foreground">
-              {interpolate(copy.order.earliest, {
-                date: formatDate(minDate, locale),
-              })}
-            </p>
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label={copy.order.name} htmlFor="name">
                 <Input
@@ -545,39 +441,11 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                   onChange={(e) => setDraft({ email: e.target.value })}
                 />
               </Field>
-              <Field label={copy.order.date} htmlFor="date">
-                <Input
-                  id="date"
-                  type="date"
-                  min={minDate}
-                  value={draft.date}
-                  onChange={(e) => setDraft({ date: e.target.value })}
-                />
-              </Field>
               <div className="sm:col-span-2">
                 <p className="mb-2 text-sm font-medium">{copy.order.delivery}</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {(
-                    [
-                      ["pickup", copy.order.pickup],
-                      ["delivery", copy.order.courier],
-                    ] as const
-                  ).map(([id, label]) => (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => setDraft({ delivery: id })}
-                      className={cn(
-                        "h-11 rounded-md border text-sm transition-colors duration-150",
-                        draft.delivery === id
-                          ? "border-foreground bg-card"
-                          : "border-border hover:border-foreground/35",
-                      )}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
+                <p className="rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground">
+                  {copy.order.pickup}
+                </p>
               </div>
               <Field label={copy.order.inscription} htmlFor="inscription">
                 <Input
@@ -649,14 +517,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
         )}
         <dl className="mt-4 space-y-2.5 text-sm">
           <Row
-            label={copy.order.rowOccasion}
-            value={
-              draft.occasion
-                ? occasionCopy(copy, draft.occasion).label
-                : copy.order.unset
-            }
-          />
-          <Row
             label={copy.order.rowSize}
             value={
               draft.size ? sizeCopy(copy, draft.size).label : copy.order.unset
@@ -680,14 +540,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             label={copy.order.rowTaste}
             value={
               draft.taste ? tasteCopy(copy, draft.taste) : copy.order.unset
-            }
-          />
-          <Row
-            label={copy.order.rowFinish}
-            value={
-              draft.finish
-                ? finishCopy(copy, draft.finish).label
-                : copy.order.unset
             }
           />
           <Row
