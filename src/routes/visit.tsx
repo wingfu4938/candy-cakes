@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { CakeImage } from "@/components/cake-image";
 import { VISIT } from "@/lib/catalog";
 import { interpolate, useCopy } from "@/lib/i18n";
-import { useChatStore } from "@/lib/chat-store";
 import { useOrderStore } from "@/lib/order-store";
 
 export const Route = createFileRoute("/visit")({ component: Visit });
@@ -15,7 +14,6 @@ export const Route = createFileRoute("/visit")({ component: Visit });
 function Visit() {
   const copy = useCopy();
   const submitInquiry = useOrderStore((s) => s.submitInquiry);
-  const openChat = useChatStore((s) => s.setOpen);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -79,9 +77,6 @@ function Visit() {
                 >
                   {copy.chat.facebookCta}
                 </a>
-              </Button>
-              <Button type="button" variant="outline" onClick={() => openChat(true)}>
-                {copy.chat.open}
               </Button>
             </dd>
           </div>
