@@ -30,8 +30,10 @@ import {
   tasteCopy,
   tasteNoteCopy,
   useCopy,
+  useLocale,
 } from "@/lib/i18n";
 import { type Commission, useOrderStore } from "@/lib/order-store";
+import { notifyOrderFn } from "@/lib/notify-order.server";
 import { cn } from "@/lib/utils";
 
 function ChoiceCard({
@@ -68,6 +70,7 @@ function ChoiceCard({
 
 export function OrderWizard({ prefills }: { prefills?: string }) {
   const copy = useCopy();
+  const locale = useLocale();
   const draft = useOrderStore((s) => s.draft);
   const setDraft = useOrderStore((s) => s.setDraft);
   const submitCommission = useOrderStore((s) => s.submitCommission);
@@ -133,6 +136,40 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (result) {
       setSubmitted(result);
       setErrors([]);
+      // Fire-and-forget: email the shop owner. The confirmation page shows
+      // regardless — a notification failure must never block the customer.
+      const cakeObj = result.flavor ? getCake(result.flavor) : undefined;
+      const cakeName = result.flavor ? cakeCopy(copy, result.flavor) : undefined;
+      const pickupDate = new Date(
+        Date.now() + result.leadDays * 24 * 60 * 60 * 1000,
+      );
+      notifyOrderFn({
+        data: {
+          orderId: result.id,
+          createdAt: new Date(result.createdAt).toLocaleString(
+            locale === "zh" ? "zh-CN" : "en-NZ",
+          ),
+          customerName: result.name,
+          customerPhone: result.phone,
+          customerEmail: result.email,
+          cakeLabel:
+            cakeObj && cakeName
+              ? `No. ${cakeNumber(cakeObj)} · ${cakeName.name}`
+              : result.flavor,
+          sizeLabel: result.size ? sizeCopy(copy, result.size).label : "",
+          creamLabel: result.cream ? creamCopy(copy, result.cream) : "",
+          tasteLabel: result.taste ? tasteCopy(copy, result.taste) : "",
+          inscription: result.inscription,
+          notes: result.notes,
+          pickupHint:
+            result.leadDays <= 0
+              ? (locale === "zh" ? "可当天取" : "Same-day pickup")
+              : `${pickupDate.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-NZ")} (${result.leadDays}天 / days)`,
+          locale,
+        },
+      }).catch((err) => {
+        console.warn("[notify-order] failed", err);
+      });
     }
   }
 
