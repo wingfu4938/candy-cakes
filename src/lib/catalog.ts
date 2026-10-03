@@ -9,7 +9,8 @@ export type OccasionId =
   | "seasonal"
   | "other";
 
-export type SizeId = "4" | "6" | "8" | "10" | "tier2";
+export type SizeId = string;
+export type SizeGroup = "single" | "tiered";
 export type FlavorId = string;
 export type FinishId =
   | "velvet"
@@ -17,6 +18,7 @@ export type FinishId =
   | "fruit"
   | "sugar-flower"
   | "naked";
+export type CreamId = "cheese-mousse" | "fresh-cream" | "butter-cream";
 
 export type Cake = GalleryCake;
 
@@ -41,29 +43,112 @@ export const CATEGORY_IDS: CategoryId[] = [
   "cup",
 ];
 
-export const SIZES: {
+export type CakeSize = {
   id: SizeId;
-  delta: number;
-}[] = [
-  { id: "4", delta: -30 },
-  { id: "6", delta: 0 },
-  { id: "8", delta: 30 },
-  { id: "10", delta: 70 },
-  { id: "tier2", delta: 150 },
+  group: SizeGroup;
+  /** English display label, e.g. "5 inch". */
+  label: string;
+  /** English servings text, e.g. "feeds about 2 people". */
+  servings: string;
+  /** Diameter, single tier only, e.g. "14cm". */
+  cm?: string;
+};
+
+export const SIZES: CakeSize[] = [
+  { id: "5", group: "single", label: "5 inch", servings: "feeds about 2 people", cm: "14cm" },
+  { id: "6", group: "single", label: "6 inch", servings: "feeds about 3-6 people", cm: "16cm" },
+  { id: "8", group: "single", label: "8 inch", servings: "feeds about 8-15 people", cm: "20cm" },
+  { id: "10", group: "single", label: "10 inch", servings: "feeds about 15-25 people", cm: "25cm" },
+  { id: "12", group: "single", label: "12 inch", servings: "feeds about 20-30 people", cm: "30cm" },
+  { id: "5+8", group: "tiered", label: "5+8 inch", servings: "feeds about 10-18 people" },
+  { id: "6+6", group: "tiered", label: "6+6 inch", servings: "feeds about 10-15 people" },
+  { id: "6+8", group: "tiered", label: "6+8 inch", servings: "feeds about 12-20 people" },
+  { id: "6+10", group: "tiered", label: "6+10 inch", servings: "feeds about 18-26 people" },
+  { id: "8+10", group: "tiered", label: "8+10 inch", servings: "feeds about 10-18 people" },
+  { id: "8+12", group: "tiered", label: "8+12 inch", servings: "feeds about 30-45 people" },
+  { id: "10+12", group: "tiered", label: "10+12 inch", servings: "feeds about 45-65 people" },
+  { id: "5+8+12", group: "tiered", label: "5+8+12 inch", servings: "feeds about 45-65 people" },
+  { id: "6+8+10", group: "tiered", label: "6+8+10 inch", servings: "feeds about 40-60 people" },
+  { id: "8+10+12", group: "tiered", label: "8+10+12 inch", servings: "feeds about 60-80 people" },
 ];
 
-export const BASE_PRICE = 118;
+export const SINGLE_TIER_SIZES = SIZES.filter((s) => s.group === "single");
+export const TIERED_SIZES = SIZES.filter((s) => s.group === "tiered");
 
 export const FINISHES: {
   id: FinishId;
-  extra: number;
 }[] = [
-  { id: "velvet", extra: 0 },
-  { id: "buttercream", extra: 25 },
-  { id: "fruit", extra: 15 },
-  { id: "sugar-flower", extra: 60 },
-  { id: "naked", extra: 0 },
+  { id: "velvet" },
+  { id: "buttercream" },
+  { id: "fruit" },
+  { id: "sugar-flower" },
+  { id: "naked" },
 ];
+
+export const CREAM_TYPES: { id: CreamId }[] = [
+  { id: "cheese-mousse" },
+  { id: "fresh-cream" },
+  { id: "butter-cream" },
+];
+
+export type CreamFlavor = {
+  id: string;
+  /** Key into messages' tasteNotes, e.g. "sweet-or-salty". */
+  note?: string;
+};
+
+export const CREAM_FLAVORS: Record<CreamId, CreamFlavor[]> = {
+  "cheese-mousse": [
+    { id: "classic-plain" },
+    { id: "tiramisu" },
+    { id: "vanilla" },
+    { id: "lemon" },
+    { id: "rainbow-cake" },
+    { id: "redvelvet" },
+    { id: "chocolate" },
+    { id: "taro" },
+    { id: "season-fruit" },
+    { id: "chocolate-cookies-cream", note: "sweet-or-salty" },
+    { id: "salt-caramel", note: "almonds-option" },
+    { id: "matcha" },
+    { id: "mocha-coffee" },
+  ],
+  "fresh-cream": [
+    { id: "classic-plain" },
+    { id: "vanilla" },
+    { id: "lemon" },
+    { id: "rainbow-cake" },
+    { id: "redvelvet" },
+    { id: "chocolate" },
+    { id: "sesame" },
+    { id: "strawberry" },
+    { id: "mango" },
+    { id: "mixed-season-fruit" },
+    { id: "durian" },
+    { id: "pandan-coconut-durian" },
+    { id: "chocolate-cookies-cream", note: "sweet-or-salty" },
+    { id: "salt-caramel", note: "almonds-option" },
+    { id: "taro" },
+    { id: "taro-coconut-cream" },
+    { id: "matcha" },
+    { id: "matcha-red-beans" },
+    { id: "matcha-fresh-fruit" },
+    { id: "mocha-coffee" },
+  ],
+  "butter-cream": [
+    { id: "classic-plain" },
+    { id: "vanilla" },
+    { id: "lemon" },
+    { id: "rainbow-cake" },
+    { id: "redvelvet" },
+    { id: "sesame" },
+    { id: "chocolate" },
+    { id: "chocolate-cookies-cream", note: "sweet-or-salty" },
+    { id: "salt-caramel", note: "almonds-option" },
+    { id: "matcha" },
+    { id: "mocha-coffee" },
+  ],
+};
 
 export const CAKES: Cake[] = GALLERY;
 
@@ -90,9 +175,8 @@ export function cakesIn(category: CategoryId) {
   return CAKES.filter((c) => c.category === category);
 }
 
-export function sizePrice(size: SizeId) {
-  const found = SIZES.find((s) => s.id === size);
-  return BASE_PRICE + (found?.delta ?? 0);
+export function sizeById(id: SizeId | null | undefined) {
+  return SIZES.find((s) => s.id === id);
 }
 
 export function occasionFor(category: CategoryId): OccasionId {
@@ -114,18 +198,6 @@ export function leadDaysFor(input: {
   if (input.occasion === "wedding") days = Math.max(days, 7);
   if (input.finish === "sugar-flower") days = Math.max(days, 7);
   return days;
-}
-
-export function quotePrice(input: {
-  size: SizeId | null;
-  flavor: FlavorId | null;
-  finish: FinishId | null;
-}) {
-  const cake = input.flavor ? getCake(input.flavor) : undefined;
-  const size = SIZES.find((s) => s.id === input.size);
-  if (!cake || !size) return null;
-  const finish = FINISHES.find((s) => s.id === input.finish);
-  return BASE_PRICE + size.delta + (finish?.extra ?? 0);
 }
 
 export const VISIT = {
