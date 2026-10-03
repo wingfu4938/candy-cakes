@@ -69,8 +69,6 @@ export type Messages = {
     kicker: string;
     title: string;
     steps: Record<OrderStepKey, string>;
-    howMany: string;
-    howManyLead: string;
     sizeSingle: string;
     sizeTiered: string;
     design: string;
@@ -243,9 +241,6 @@ const en: Messages = {
     kicker: "Order",
     title: "Order",
     steps: { size: "Size", design: "Design", flavor: "Flavor", contact: "Contact" },
-    howMany: "How many to feed",
-    howManyLead:
-      "Size follows the table. Leftovers keep overnight.",
     sizeSingle: "Single tier",
     sizeTiered: "Double & triple tier",
     design: "Which look",
@@ -503,8 +498,6 @@ const zh: Messages = {
     kicker: "Commission",
     title: "订制",
     steps: { size: "尺寸", design: "款式", flavor: "口味", contact: "联系方式" },
-    howMany: "几个人吃",
-    howManyLead: "尺寸按人数来。吃不完也可以，蛋糕隔夜仍好。",
     sizeSingle: "单层",
     sizeTiered: "双层/三层",
     design: "款式",
