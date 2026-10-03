@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { CakeImage } from "@/components/cake-image";
-import { CAKES, CATEGORY_IDS, type CategoryId } from "@/lib/catalog";
+import { CAKES, CATEGORY_IDS, KIDS_THEME_ORDER, type CategoryId, type KidsThemeId } from "@/lib/catalog";
 import { useCopy } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -11,10 +11,20 @@ export const Route = createFileRoute("/collection/")({ component: Collection });
 function Collection() {
   const copy = useCopy();
   const [filter, setFilter] = useState<CategoryId | "all">("all");
+  const [theme, setTheme] = useState<KidsThemeId | "all">("all");
   const [open, setOpen] = useState<string | null>(null);
-  const cakes =
-    filter === "all" ? CAKES : CAKES.filter((c) => c.category === filter);
+  const cakes = CAKES.filter((c) => {
+    if (filter !== "all" && c.category !== filter) return false;
+    if (filter === "kids" && theme !== "all" && c.theme !== theme) return false;
+    return true;
+  });
   const opened = open ? CAKES.find((c) => c.slug === open) : undefined;
+
+  function cakeAlt(cake: (typeof CAKES)[number]) {
+    const base = copy.categories[cake.category];
+    if (cake.theme) return `${base} · ${copy.themes[cake.theme]}`;
+    return base;
+  }
 
   const filters: { id: CategoryId | "all"; label: string }[] = [
     { id: "all", label: copy.collection.all },
@@ -47,7 +57,10 @@ function Collection() {
           <button
             key={f.id}
             type="button"
-            onClick={() => setFilter(f.id)}
+            onClick={() => {
+              setFilter(f.id);
+              setTheme("all");
+            }}
             className={cn(
               "inline-flex h-11 shrink-0 items-center rounded-full px-4 text-sm transition-colors duration-150",
               filter === f.id
@@ -59,6 +72,39 @@ function Collection() {
           </button>
         ))}
       </div>
+
+      {filter === "kids" && (
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+          <button
+            key="all"
+            type="button"
+            onClick={() => setTheme("all")}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center rounded-full px-3 text-xs transition-colors duration-150",
+              theme === "all"
+                ? "bg-foreground text-background"
+                : "bg-muted text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {copy.collection.all}
+          </button>
+          {KIDS_THEME_ORDER.map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setTheme(t)}
+              className={cn(
+                "inline-flex h-9 shrink-0 items-center rounded-full px-3 text-xs transition-colors duration-150",
+                theme === t
+                  ? "bg-foreground text-background"
+                  : "bg-muted text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {copy.themes[t]}
+            </button>
+          ))}
+        </div>
+      )}
 
       {cakes.length === 0 ? (
         <p className="mt-16 text-sm text-muted-foreground">
@@ -75,7 +121,7 @@ function Collection() {
             >
               <CakeImage
                 src={cake.image}
-                alt={copy.categories[cake.category]}
+                alt={cakeAlt(cake)}
                 className="h-auto"
               />
             </button>
@@ -87,7 +133,7 @@ function Collection() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/90 p-4"
           role="dialog"
-          aria-label={copy.categories[opened.category]}
+          aria-label={cakeAlt(opened)}
           onClick={() => setOpen(null)}
         >
           <button
@@ -100,7 +146,7 @@ function Collection() {
           </button>
           <img
             src={opened.image}
-            alt={copy.categories[opened.category]}
+            alt={cakeAlt(opened)}
             className="max-h-[min(90svh,900px)] max-w-full object-contain"
             onClick={(e) => e.stopPropagation()}
           />
