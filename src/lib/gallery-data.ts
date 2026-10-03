@@ -5,6 +5,7 @@ export type CategoryId =
   | "fresh"
   | "fruit"
   | "boss"
+  | "lady"
   | "old"
   | "cre"
   | "wed"
