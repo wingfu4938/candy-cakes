@@ -237,12 +237,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
 
         {stepKey === "size" && (
           <fieldset>
-            <legend className="font-display text-title text-foreground">
-              {copy.order.howMany}
-            </legend>
-            <p className="mt-2 mb-6 text-sm text-muted-foreground">
-              {copy.order.howManyLead}
-            </p>
             <p className="mb-2 text-sm font-medium text-foreground">
               {copy.order.sizeSingle}
             </p>
