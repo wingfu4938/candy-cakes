@@ -109,6 +109,9 @@ export type Messages = {
     inscriptionLine: string;
     another: string;
     backToCollection: string;
+    chatNow: string;
+    chatHint: string;
+    copiedHint: string;
     errSize: string;
     errDesign: string;
     errCream: string;
@@ -289,7 +292,7 @@ const en: Messages = {
     receivedKicker: "Request received",
     receivedTitle: "{name}, we have it",
     receivedLead:
-      "This is not a confirmed slot. The chef will call or write within a working day to check allergies and delivery.",
+      "This is not a confirmed slot. Tap below to chat with us on Facebook Messenger right now and nail down the details — or we'll call or write within a working day.",
     rowSize: "Size",
     rowDesign: "Design",
     rowCream: "Cream",
@@ -297,6 +300,9 @@ const en: Messages = {
     inscriptionLine: "Inscription: {text}",
     another: "Order another",
     backToCollection: "Back to cakes",
+    chatNow: "Chat details on Facebook",
+    chatHint: "Order details copied — paste and send in Messenger.",
+    copiedHint: "Copied ✓",
     errSize: "Please choose a size",
     errDesign: "Please choose a design",
     errCream: "Please choose a cream",
@@ -561,7 +567,7 @@ const zh: Messages = {
     receivedKicker: "预约已收下",
     receivedTitle: "{name}，我们记下了",
     receivedLead:
-      "这不是自动确认档期。主理人会在一个工作日内打电话或写信给你，核对过敏和送件。",
+      "这不是自动确认档期。点下面直接去 Facebook 跟我们聊，把明细定下来——或者我们会在一个工作日内打电话或写信给你。",
     rowSize: "尺寸",
     rowDesign: "款式",
     rowCream: "奶油种类",
@@ -569,6 +575,9 @@ const zh: Messages = {
     inscriptionLine: "写字：{text}",
     another: "再订一块",
     backToCollection: "回作品集",
+    chatNow: "去 Facebook 聊明细",
+    chatHint: "订单明细已复制，打开 Messenger 粘贴发送即可。",
+    copiedHint: "已复制 ✓",
     errSize: "请选择尺寸",
     errDesign: "请选择款式",
     errCream: "请选择奶油种类",

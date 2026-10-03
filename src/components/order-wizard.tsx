@@ -13,6 +13,7 @@ import {
   CREAM_TYPES,
   SINGLE_TIER_SIZES,
   TIERED_SIZES,
+  VISIT,
   cakeNumber,
   getCake,
   leadDaysFor,
@@ -78,6 +79,26 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
   const [submitted, setSubmitted] = useState<Commission | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [styleFilter, setStyleFilter] = useState<CategoryId | "all">("all");
+  const [summaryCopied, setSummaryCopied] = useState(false);
+
+  /** Compact bilingual order summary for pasting into Messenger. */
+  function orderSummaryText(c: Commission): string {
+    const cakeObj = c.flavor ? getCake(c.flavor) : undefined;
+    const cakeName = c.flavor ? cakeCopy(copy, c.flavor) : undefined;
+    const lines = [
+      `【Candy Cakes 订单 Order】${c.id}`,
+      `${copy.order.rowSize} Size: ${c.size ? sizeCopy(copy, c.size).label : "-"}`,
+      `${copy.order.rowDesign} Design: ${
+        cakeObj && cakeName ? `No. ${cakeNumber(cakeObj)} · ${cakeName.name}` : (c.flavor ?? "-")
+      }`,
+      `${copy.order.rowCream} Cream: ${c.cream ? creamCopy(copy, c.cream) : "-"}`,
+      `${copy.order.rowTaste} Flavor: ${c.taste ? tasteCopy(copy, c.taste) : "-"}`,
+    ];
+    if (c.inscription.trim()) lines.push(`写字 Inscription: ${c.inscription.trim()}`);
+    if (c.notes.trim()) lines.push(`备注 Notes: ${c.notes.trim()}`);
+    lines.push(`姓名 Name: ${c.name} / 电话 Phone: ${c.phone}`);
+    return lines.join("\n");
+  }
 
   useEffect(() => {
     if (!prefills) return;
@@ -136,6 +157,15 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (result) {
       setSubmitted(result);
       setErrors([]);
+      setSummaryCopied(false);
+      // Copy the order summary so the customer can paste it into Messenger.
+      const summary = orderSummaryText(result);
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(summary).then(
+          () => setSummaryCopied(true),
+          () => setSummaryCopied(false),
+        );
+      }
       // Fire-and-forget: email the shop owner. The confirmation page shows
       // regardless — a notification failure must never block the customer.
       const cakeObj = result.flavor ? getCake(result.flavor) : undefined;
@@ -228,11 +258,17 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </p>
         )}
         <div className="mt-8 flex flex-wrap gap-3">
+          <Button asChild className="bg-[#0084ff] hover:bg-[#0073e0]">
+            <a href={VISIT.facebook} target="_blank" rel="noreferrer">
+              {copy.order.chatNow}
+            </a>
+          </Button>
           <Button
             onClick={() => {
               setSubmitted(null);
               setStepIdx(0);
             }}
+            variant="outline"
           >
             {copy.order.another}
           </Button>
@@ -240,6 +276,9 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             <Link to="/collection">{copy.order.backToCollection}</Link>
           </Button>
         </div>
+        <p className="mt-3 text-xs text-muted-foreground">
+          {summaryCopied ? copy.order.copiedHint : copy.order.chatHint}
+        </p>
       </div>
     );
   }
