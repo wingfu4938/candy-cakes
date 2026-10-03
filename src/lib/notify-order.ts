@@ -27,6 +27,8 @@ export type OrderNotifyInput = {
   customerPhone: string;
   customerEmail: string;
   cakeLabel: string;
+  /** Gallery slug, e.g. "kids-027" — used to embed the design photo. */
+  flavorSlug: string;
   sizeLabel: string;
   creamLabel: string;
   tasteLabel: string;
@@ -63,9 +65,14 @@ export const notifyOrderFn = createServerFn({ method: "POST" })
     }
 
     const subject = `新订单 ${data.orderId} · ${data.customerName} · ${data.cakeLabel}`;
+    const siteUrl = env("SITE_URL") ?? "https://candy-cakes-six-moon.vercel.app";
+    const cakeImg = data.flavorSlug
+      ? `<p style="margin:12px 0;"><img src="${siteUrl}/cakes/gallery/${esc(data.flavorSlug)}.jpg" alt="${esc(data.cakeLabel)}" style="max-width:100%;border-radius:8px;"></p>`
+      : "";
     const html = `<div style="font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;max-width:560px;margin:0 auto;">
   <h2 style="font-size:18px;">🎂 有新的蛋糕订单 New cake order</h2>
   <p style="color:#888;font-size:13px;">订单号 Order ${esc(data.orderId)} · ${esc(data.createdAt)} · 页面语言 ${esc(data.locale)}</p>
+  ${cakeImg}
   <table style="width:100%;border-collapse:collapse;margin-top:12px;">
     ${row("客人姓名", "Name", data.customerName)}
     ${row("电话", "Phone", data.customerPhone)}

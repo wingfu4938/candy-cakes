@@ -156,6 +156,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             cakeObj && cakeName
               ? `No. ${cakeNumber(cakeObj)} · ${cakeName.name}`
               : result.flavor,
+          flavorSlug: result.flavor,
           sizeLabel: result.size ? sizeCopy(copy, result.size).label : "",
           creamLabel: result.cream ? creamCopy(copy, result.cream) : "",
           tasteLabel: result.taste ? tasteCopy(copy, result.taste) : "",
