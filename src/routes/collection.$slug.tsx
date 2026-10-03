@@ -3,9 +3,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CakeImage } from "@/components/cake-image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CAKES, SIZES, cakeNumber, getCake, sizePrice } from "@/lib/catalog";
-import { sizeCopy, useCopy, useLocale } from "@/lib/i18n";
-import { formatPrice } from "@/lib/utils";
+import { CAKES, SINGLE_TIER_SIZES, TIERED_SIZES, cakeNumber, getCake } from "@/lib/catalog";
+import { sizeCopy, useCopy } from "@/lib/i18n";
 
 export const Route = createFileRoute("/collection/$slug")({
   loader: ({ params }) => {
@@ -19,7 +18,6 @@ export const Route = createFileRoute("/collection/$slug")({
 function CakeDetail() {
   const cake = Route.useLoaderData();
   const copy = useCopy();
-  const locale = useLocale();
   const label = copy.categories[cake.category];
   const others = CAKES.filter(
     (item) => item.category === cake.category && item.slug !== cake.slug,
@@ -61,22 +59,51 @@ function CakeDetail() {
                   <th className="px-4 py-2.5 text-left font-medium">
                     {copy.collection.serves}
                   </th>
-                  <th className="px-4 py-2.5 text-right font-medium">
-                    {copy.collection.basePrice}
-                  </th>
                 </tr>
               </thead>
               <tbody>
-                {SIZES.map((s) => {
+                <tr className="border-t border-border bg-muted/50">
+                  <td
+                    colSpan={2}
+                    className="px-4 py-2 text-xs font-medium text-muted-foreground"
+                  >
+                    {copy.order.sizeSingle}
+                  </td>
+                </tr>
+                {SINGLE_TIER_SIZES.map((s) => {
+                  const size = sizeCopy(copy, s.id);
+                  return (
+                    <tr key={s.id} className="border-t border-border">
+                      <td className="px-4 py-2.5">
+                        {size.label}
+                        {size.cm && (
+                          <span className="text-muted-foreground">
+                            {" "}
+                            · {size.cm}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-2.5 text-muted-foreground">
+                        {size.servings}
+                      </td>
+                    </tr>
+                  );
+                })}
+                <tr className="border-t border-border bg-muted/50">
+                  <td
+                    colSpan={2}
+                    className="px-4 py-2 text-xs font-medium text-muted-foreground"
+                  >
+                    {copy.order.sizeTiered}
+                  </td>
+                </tr>
+                {TIERED_SIZES.map((s) => {
                   const size = sizeCopy(copy, s.id);
                   return (
                     <tr key={s.id} className="border-t border-border">
                       <td className="px-4 py-2.5">{size.label}</td>
                       <td className="px-4 py-2.5 text-muted-foreground">
                         {size.servings}
-                      </td>
-                      <td className="px-4 py-2.5 text-right tabular-nums">
-                        {formatPrice(sizePrice(s.id), locale)}
                       </td>
                     </tr>
                   );
