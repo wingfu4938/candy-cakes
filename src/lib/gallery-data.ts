@@ -14,6 +14,7 @@ export type CategoryId =
 export type KidsThemeId =
   | "cartoon"
   | "videogame"
+  | "minecraft"
   | "other"
   | "princess"
   | "sports"
@@ -32,7 +33,7 @@ export type GalleryCake = {
   theme?: KidsThemeId;
 };
 
-export const KIDS_THEME_ORDER: KidsThemeId[] = ["cartoon", "videogame", "princess", "sports", "cars", "ocean", "frozen", "animals", "superhero", "pawpatrol", "lolsurprise", "other"];
+export const KIDS_THEME_ORDER: KidsThemeId[] = ["cartoon", "videogame", "minecraft", "princess", "sports", "cars", "ocean", "frozen", "animals", "superhero", "pawpatrol", "lolsurprise", "other"];
 
 export const GALLERY: GalleryCake[] = [
   { slug: "kids-001", category: "kids", image: "/cakes/gallery/kids-001.jpg" , theme: "cartoon" },
@@ -48,10 +49,10 @@ export const GALLERY: GalleryCake[] = [
   { slug: "cup-001", category: "cup", image: "/cakes/gallery/cup-001.jpg" },
   { slug: "pipe-004", category: "pipe", image: "/cakes/gallery/pipe-004.jpg" },
   { slug: "cre-001", category: "cre", image: "/cakes/gallery/cre-001.jpg" },
-  { slug: "kids-006", category: "kids", image: "/cakes/gallery/kids-006.jpg" , theme: "videogame" },
+  { slug: "kids-006", category: "kids", image: "/cakes/gallery/kids-006.jpg" , theme: "minecraft" },
   { slug: "fruit-002", category: "fruit", image: "/cakes/gallery/fruit-002.jpg" },
   { slug: "kids-007", category: "kids", image: "/cakes/gallery/kids-007.jpg" , theme: "other" },
-  { slug: "kids-008", category: "kids", image: "/cakes/gallery/kids-008.jpg" , theme: "videogame" },
+  { slug: "kids-008", category: "kids", image: "/cakes/gallery/kids-008.jpg" , theme: "minecraft" },
   { slug: "wed-001", category: "wed", image: "/cakes/gallery/wed-001.jpg" },
   { slug: "kids-009", category: "kids", image: "/cakes/gallery/kids-009.jpg" , theme: "cartoon" },
   { slug: "pipe-005", category: "pipe", image: "/cakes/gallery/pipe-005.jpg" },
@@ -158,7 +159,7 @@ export const GALLERY: GalleryCake[] = [
   { slug: "cre-012", category: "cre", image: "/cakes/gallery/cre-012.jpg" },
   { slug: "pipe-023", category: "pipe", image: "/cakes/gallery/pipe-023.jpg" },
   { slug: "kids-047", category: "kids", image: "/cakes/gallery/kids-047.jpg" , theme: "frozen" },
-  { slug: "kids-048", category: "kids", image: "/cakes/gallery/kids-048.jpg" , theme: "videogame" },
+  { slug: "kids-048", category: "kids", image: "/cakes/gallery/kids-048.jpg" , theme: "minecraft" },
   { slug: "fruit-013", category: "fruit", image: "/cakes/gallery/fruit-013.jpg" },
   { slug: "kids-049", category: "kids", image: "/cakes/gallery/kids-049.jpg" , theme: "ocean" },
   { slug: "kids-050", category: "kids", image: "/cakes/gallery/kids-050.jpg" , theme: "videogame" },
@@ -176,7 +177,7 @@ export const GALLERY: GalleryCake[] = [
   { slug: "pipe-025", category: "pipe", image: "/cakes/gallery/pipe-025.jpg" },
   { slug: "kids-058", category: "kids", image: "/cakes/gallery/kids-058.jpg" , theme: "frozen" },
   { slug: "kids-059", category: "kids", image: "/cakes/gallery/kids-059.jpg" , theme: "cartoon" },
-  { slug: "kids-060", category: "kids", image: "/cakes/gallery/kids-060.jpg" , theme: "videogame" },
+  { slug: "kids-060", category: "kids", image: "/cakes/gallery/kids-060.jpg" , theme: "minecraft" },
   { slug: "pipe-026", category: "pipe", image: "/cakes/gallery/pipe-026.jpg" },
   { slug: "kids-061", category: "kids", image: "/cakes/gallery/kids-061.jpg" , theme: "cartoon" },
   { slug: "baby-015", category: "baby", image: "/cakes/gallery/baby-015.jpg" },
@@ -236,7 +237,7 @@ export const GALLERY: GalleryCake[] = [
   { slug: "wed-007", category: "wed", image: "/cakes/gallery/wed-007.jpg" },
   { slug: "kids-074", category: "kids", image: "/cakes/gallery/kids-074.jpg" , theme: "animals" },
   { slug: "kids-075", category: "kids", image: "/cakes/gallery/kids-075.jpg" , theme: "other" },
-  { slug: "kids-076", category: "kids", image: "/cakes/gallery/kids-076.jpg" , theme: "videogame" },
+  { slug: "kids-076", category: "kids", image: "/cakes/gallery/kids-076.jpg" , theme: "minecraft" },
   { slug: "kids-077", category: "kids", image: "/cakes/gallery/kids-077.jpg" , theme: "cartoon" },
   { slug: "kids-078", category: "kids", image: "/cakes/gallery/kids-078.jpg" , theme: "sports" },
   { slug: "cre-019", category: "cre", image: "/cakes/gallery/cre-019.jpg" },
