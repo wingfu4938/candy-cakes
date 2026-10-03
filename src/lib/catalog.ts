@@ -129,7 +129,7 @@ export function quotePrice(input: {
 }
 
 export const VISIT = {
-  facebook: "https://m.me/CandyCakesNZ",
+  facebook: "https://www.messenger.com/t/CandyCakesNZ",
   facebookPage: "https://www.facebook.com/CandyCakesNZ",
   maps: "https://maps.google.com/?q=Shop+4+97Z+Heaphy+Terrace+Fairfield+Hamilton+3214",
 };
