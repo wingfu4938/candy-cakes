@@ -97,6 +97,11 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (c.inscription.trim()) lines.push(`写字 Inscription: ${c.inscription.trim()}`);
     if (c.notes.trim()) lines.push(`备注 Notes: ${c.notes.trim()}`);
     lines.push(`姓名 Name: ${c.name} / 电话 Phone: ${c.phone}`);
+    if (c.flavor) {
+      const origin =
+        typeof window !== "undefined" ? window.location.origin : "";
+      if (origin) lines.push(`图片 Photo: ${origin}/cakes/gallery/${c.flavor}.jpg`);
+    }
     return lines.join("\n");
   }
 
