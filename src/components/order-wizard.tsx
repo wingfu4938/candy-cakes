@@ -543,15 +543,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                   onChange={(e) => setDraft({ phone: e.target.value })}
                 />
               </Field>
-              <Field label={copy.order.email} htmlFor="email">
-                <Input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  value={draft.email}
-                  onChange={(e) => setDraft({ email: e.target.value })}
-                />
-              </Field>
               <div className="sm:col-span-2">
                 <p className="mb-2 text-sm font-medium">{copy.order.delivery}</p>
                 <p className="rounded-md border border-border bg-card px-4 py-3 text-sm text-foreground">
