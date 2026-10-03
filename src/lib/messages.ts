@@ -1,9 +1,9 @@
 import type {
   CategoryId,
+  CreamId,
   FinishId,
   KidsThemeId,
   OccasionId,
-  SizeId,
 } from "@/lib/catalog";
 
 export type Locale = "en" | "zh";
@@ -41,7 +41,6 @@ export type Messages = {
     collectionKicker: string;
     collectionTitle: string;
     allCakes: string;
-    from: string;
     processKicker: string;
     processTitle: string;
     notesKicker: string;
@@ -64,10 +63,8 @@ export type Messages = {
     season: string;
     leadTime: string;
     leadDays: string;
-    priceFrom: string;
     size: string;
     serves: string;
-    basePrice: string;
     sameCake: string;
     talk: string;
     others: string;
@@ -82,8 +79,13 @@ export type Messages = {
     forWhomLead: string;
     howMany: string;
     howManyLead: string;
-    flavors: string;
-    flavorsLead: string;
+    sizeSingle: string;
+    sizeTiered: string;
+    design: string;
+    designLead: string;
+    taste: string;
+    tasteLead: string;
+    creamLabel: string;
     finish: string;
     finishLead: string;
     yourDay: string;
@@ -104,24 +106,25 @@ export type Messages = {
     send: string;
     summary: string;
     unset: string;
-    included: string;
     estimate: string;
-    estimateNote: string;
     receivedKicker: string;
     receivedTitle: string;
     receivedLead: string;
     rowOccasion: string;
     rowSize: string;
-    rowFlavor: string;
+    rowDesign: string;
+    rowCream: string;
+    rowTaste: string;
     rowFinish: string;
     rowDate: string;
-    rowQuote: string;
     inscriptionLine: string;
     another: string;
     backToCollection: string;
     errOccasion: string;
     errSize: string;
-    errFlavor: string;
+    errDesign: string;
+    errCream: string;
+    errTaste: string;
     errFinish: string;
     errName: string;
     errPhone: string;
@@ -132,7 +135,10 @@ export type Messages = {
   occasions: Record<OccasionId, { label: string; hint: string }>;
   categories: Record<CategoryId, string>;
   themes: Record<KidsThemeId, string>;
-  sizes: Record<SizeId, { label: string; servings: string; hint: string }>;
+  sizes: Record<string, { servings: string }>;
+  creams: Record<CreamId, string>;
+  tastes: Record<string, string>;
+  tasteNotes: Record<string, string>;
   finishes: Record<FinishId, { label: string; hint: string }>;
   atelier: {
     kicker: string;
@@ -234,7 +240,6 @@ const en: Messages = {
     collectionKicker: "Shop",
     collectionTitle: "Cakes",
     allCakes: "All cakes",
-    from: "from",
     processKicker: "How to order",
     processTitle: "From the first message to pickup",
     notesKicker: "Notes",
@@ -292,10 +297,8 @@ const en: Messages = {
     season: "Season",
     leadTime: "Lead time",
     leadDays: "{n} days",
-    priceFrom: "From",
     size: "Size",
     serves: "Serves",
-    basePrice: "Base",
     sameCake: "Order this look",
     talk: "Visit the shop",
     others: "More cakes",
@@ -304,17 +307,22 @@ const en: Messages = {
   order: {
     kicker: "Order",
     title: "Order",
-    lead: "Choose occasion, size, cake and finish. Sending this is a request — we confirm on Facebook within a working day.",
-    steps: ["Occasion", "Size", "Cake", "Finish", "Your day"],
+    lead: "Choose occasion, size, design, flavor and finish. Sending this is a request — we confirm on Facebook within a working day.",
+    steps: ["Occasion", "Size", "Design", "Flavor", "Finish", "Your day"],
     forWhom: "Who is it for",
     forWhomLead:
       "The occasion sets how many days we need. Weddings and sugar flowers take a week.",
     howMany: "How many to feed",
     howManyLead:
       "Size follows the table. Leftovers keep overnight.",
-    flavors: "Which look",
-    flavorsLead:
+    sizeSingle: "Single tier",
+    sizeTiered: "Double & triple tier",
+    design: "Which look",
+    designLead:
       "Choose a cake we have made. We will follow that look, then adjust size and words for you.",
+    taste: "Flavor",
+    tasteLead: "First pick a cream, then the flavor inside.",
+    creamLabel: "Cream",
     finish: "How it should look",
     finishLead:
       "Sugar flowers need time to dry. Velvet spray is the default, and the quietest.",
@@ -336,25 +344,26 @@ const en: Messages = {
     send: "Send the request",
     summary: "This cake",
     unset: "Not yet",
-    included: "included",
     estimate: "Lead time",
-    estimateNote: "A quote. We may adjust when we confirm.",
     receivedKicker: "Request received",
     receivedTitle: "{name}, we have it",
     receivedLead:
-      "This is not a confirmed slot. The chef will call or write within a working day to check allergies, delivery and the final quote.",
+      "This is not a confirmed slot. The chef will call or write within a working day to check allergies and delivery.",
     rowOccasion: "Occasion",
     rowSize: "Size",
-    rowFlavor: "Flavour",
+    rowDesign: "Design",
+    rowCream: "Cream",
+    rowTaste: "Flavor",
     rowFinish: "Finish",
     rowDate: "Date",
-    rowQuote: "Quote",
     inscriptionLine: "Inscription: {text}",
     another: "Order another",
     backToCollection: "Back to cakes",
     errOccasion: "Please choose an occasion",
     errSize: "Please choose a size",
-    errFlavor: "Please choose a flavour",
+    errDesign: "Please choose a design",
+    errCream: "Please choose a cream",
+    errTaste: "Please choose a flavor",
     errFinish: "Please choose a finish",
     errName: "Please leave a name",
     errPhone: "Please leave a valid phone number",
@@ -411,31 +420,54 @@ const en: Messages = {
     other: "Other",
   },
   sizes: {
-    "4": {
-      label: "4 inch",
-      servings: "2–3",
-      hint: "Two people, or a small treat.",
-    },
-    "6": {
-      label: "6 inch",
-      servings: "4–6",
-      hint: "The usual birthday size.",
-    },
-    "8": {
-      label: "8 inch",
-      servings: "7–10",
-      hint: "A gathering at home.",
-    },
-    "10": {
-      label: "10 inch",
-      servings: "10–13",
-      hint: "A full family table.",
-    },
-    tier2: {
-      label: "Two tiers",
-      servings: "20–24",
-      hint: "Weddings and bigger parties.",
-    },
+    "5": { servings: "feeds about 2 people" },
+    "6": { servings: "feeds about 3-6 people" },
+    "8": { servings: "feeds about 8-15 people" },
+    "10": { servings: "feeds about 15-25 people" },
+    "12": { servings: "feeds about 20-30 people" },
+    "5+8": { servings: "feeds about 10-18 people" },
+    "6+6": { servings: "feeds about 10-15 people" },
+    "6+8": { servings: "feeds about 12-20 people" },
+    "6+10": { servings: "feeds about 18-26 people" },
+    "8+10": { servings: "feeds about 10-18 people" },
+    "8+12": { servings: "feeds about 30-45 people" },
+    "10+12": { servings: "feeds about 45-65 people" },
+    "5+8+12": { servings: "feeds about 45-65 people" },
+    "6+8+10": { servings: "feeds about 40-60 people" },
+    "8+10+12": { servings: "feeds about 60-80 people" },
+  },
+  creams: {
+    "cheese-mousse": "Cheese mousse cream",
+    "fresh-cream": "Fresh cream",
+    "butter-cream": "Butter cream",
+  },
+  tastes: {
+    "classic-plain": "Classic plain",
+    "tiramisu": "Tiramisu",
+    "vanilla": "Vanilla",
+    "lemon": "Lemon",
+    "rainbow-cake": "Rainbow cake",
+    "redvelvet": "Redvelvet",
+    "chocolate": "Chocolate",
+    "taro": "Taro",
+    "season-fruit": "Season fruit",
+    "chocolate-cookies-cream": "Chocolate Cookies & cream",
+    "salt-caramel": "Salt caramel",
+    "matcha": "Matcha",
+    "mocha-coffee": "Mocha Coffee",
+    "sesame": "Sesame",
+    "strawberry": "Strawberry",
+    "mango": "Mango",
+    "mixed-season-fruit": "Mixed season fruit",
+    "durian": "Durian",
+    "pandan-coconut-durian": "Pandan Coconut Durian",
+    "taro-coconut-cream": "Taro with Coconut Cream",
+    "matcha-red-beans": "Matcha and red beans",
+    "matcha-fresh-fruit": "Matcha with fresh fruit",
+  },
+  tasteNotes: {
+    "sweet-or-salty": "sweet or salty",
+    "almonds-option": "with almonds or no almonds",
   },
   finishes: {
     velvet: {
@@ -491,7 +523,7 @@ const en: Messages = {
     faq: [
       {
         q: "What size for how many people?",
-        a: "4 inch serves 2–3. 6 inch serves 4–6. 8 inch serves 7–10. 10 inch serves 10–13. Two tiers serve about 20–24.",
+        a: "Single tiers run 5 to 12 inch, feeding about 2 to 30 people. Double and triple tiers feed about 10 to 80. The size table on each cake page lists them all.",
       },
       {
         q: "Can I order a custom cake?",
@@ -503,7 +535,7 @@ const en: Messages = {
       },
       {
         q: "What flavours do you make?",
-        a: "Vanilla, chocolate, strawberry, yuzu, chestnut, Earl Grey, lychee rose. Cartoon and floral are finishes on top of those bases.",
+        a: "Cheese mousse cream, fresh cream and butter cream, with over twenty fillings from classic plain and matcha to durian and taro. The order form lists them all by cream.",
       },
     ],
   },
@@ -660,10 +692,8 @@ const zh: Messages = {
     season: "时令",
     leadTime: "准备",
     leadDays: "{n} 天",
-    priceFrom: "起价",
     size: "尺寸",
     serves: "人数",
-    basePrice: "基础价",
     sameCake: "订这一款",
     talk: "到店对谈",
     others: "其它款式",
@@ -672,14 +702,19 @@ const zh: Messages = {
   order: {
     kicker: "Commission",
     title: "订制",
-    lead: "选场合、尺寸、风味与外观。送出后不是自动下单——主理人会在一个工作日内与你核对档期、过敏和最终估价。",
-    steps: ["场合", "尺寸", "风味", "外观", "你的日子"],
+    lead: "选场合、尺寸、款式、口味与外观。送出后不是自动下单——主理人会在一个工作日内与你核对档期和过敏。",
+    steps: ["场合", "尺寸", "款式", "口味", "外观", "你的日子"],
     forWhom: "这一块，为谁",
     forWhomLead: "场合决定尺寸与准备天数。婚礼和糖花需要十四日。",
     howMany: "几个人吃",
     howManyLead: "尺寸按人数来。吃不完也可以，蛋糕隔夜仍好。",
-    flavors: "选样子",
-    flavorsLead: "从做过的蛋糕里选一款。我们按这个样子做，再改尺寸和字。",
+    sizeSingle: "单层",
+    sizeTiered: "双层/三层",
+    design: "款式",
+    designLead: "从做过的蛋糕里选一款。我们按这个样子做，再改尺寸和字。",
+    taste: "口味",
+    tasteLead: "先选奶油种类，再选里面的口味。",
+    creamLabel: "奶油种类",
     finish: "表面怎么做",
     finishLead: "糖花需要更长的晾干时间。丝绒喷砂是默认，也最干净。",
     yourDay: "你的日子",
@@ -700,25 +735,26 @@ const zh: Messages = {
     send: "送出预约",
     summary: "这一块",
     unset: "未选",
-    included: "含入",
     estimate: "准备",
-    estimateNote: "估价，确认时可能微调。",
     receivedKicker: "预约已收下",
     receivedTitle: "{name}，我们记下了",
     receivedLead:
-      "这不是自动确认档期。主理人会在一个工作日内打电话或写信给你，核对过敏、送件和最终估价。",
+      "这不是自动确认档期。主理人会在一个工作日内打电话或写信给你，核对过敏和送件。",
     rowOccasion: "场合",
     rowSize: "尺寸",
-    rowFlavor: "风味",
+    rowDesign: "款式",
+    rowCream: "奶油种类",
+    rowTaste: "口味",
     rowFinish: "外观",
     rowDate: "取件",
-    rowQuote: "估价",
     inscriptionLine: "写字：{text}",
     another: "再订一块",
     backToCollection: "回作品集",
     errOccasion: "请选择场合",
     errSize: "请选择尺寸",
-    errFlavor: "请选择风味",
+    errDesign: "请选择款式",
+    errCream: "请选择奶油种类",
+    errTaste: "请选择口味",
     errFinish: "请选择外观",
     errName: "请留下姓名",
     errPhone: "请留下有效电话",
@@ -760,11 +796,54 @@ const zh: Messages = {
     other: "其他",
   },
   sizes: {
-    "4": { label: "4 寸", servings: "2–3 人", hint: "两个人，或一块试试。" },
-    "6": { label: "6 寸", servings: "4–6 人", hint: "最常见的生日尺寸。" },
-    "8": { label: "8 寸", servings: "7–10 人", hint: "家里的聚会刚刚好。" },
-    "10": { label: "10 寸", servings: "10–13 人", hint: "一桌亲戚，切得开。" },
-    tier2: { label: "双层", servings: "20–24 人", hint: "婚礼或更大的聚会。" },
+    "5": { servings: "约供2人" },
+    "6": { servings: "约供3-6人" },
+    "8": { servings: "约供8-15人" },
+    "10": { servings: "约供15-25人" },
+    "12": { servings: "约供20-30人" },
+    "5+8": { servings: "约供10-18人" },
+    "6+6": { servings: "约供10-15人" },
+    "6+8": { servings: "约供12-20人" },
+    "6+10": { servings: "约供18-26人" },
+    "8+10": { servings: "约供10-18人" },
+    "8+12": { servings: "约供30-45人" },
+    "10+12": { servings: "约供45-65人" },
+    "5+8+12": { servings: "约供45-65人" },
+    "6+8+10": { servings: "约供40-60人" },
+    "8+10+12": { servings: "约供60-80人" },
+  },
+  creams: {
+    "cheese-mousse": "芝士慕斯奶油",
+    "fresh-cream": "鲜奶油",
+    "butter-cream": "黄油奶油",
+  },
+  tastes: {
+    "classic-plain": "经典原味",
+    "tiramisu": "提拉米苏",
+    "vanilla": "香草",
+    "lemon": "柠檬",
+    "rainbow-cake": "彩虹",
+    "redvelvet": "红丝绒",
+    "chocolate": "巧克力",
+    "taro": "芋头",
+    "season-fruit": "时令水果",
+    "chocolate-cookies-cream": "巧克力曲奇奶油",
+    "salt-caramel": "海盐焦糖",
+    "matcha": "抹茶",
+    "mocha-coffee": "摩卡咖啡",
+    "sesame": "芝麻",
+    "strawberry": "草莓",
+    "mango": "芒果",
+    "mixed-season-fruit": "混合时令水果",
+    "durian": "榴莲",
+    "pandan-coconut-durian": "班兰椰子榴莲",
+    "taro-coconut-cream": "芋头椰子奶油",
+    "matcha-red-beans": "抹茶红豆",
+    "matcha-fresh-fruit": "抹茶鲜果",
+  },
+  tasteNotes: {
+    "sweet-or-salty": "甜或咸",
+    "almonds-option": "可加杏仁或不加",
   },
   finishes: {
     velvet: { label: "丝绒喷砂", hint: "哑光、干净，把风味留在第一口。" },
@@ -791,6 +870,26 @@ const zh: Messages = {
     ],
     visitLead: "想看糖艺或试味道，请先预约到店。我们不接待未经约定的访客，厨房很小。",
     visitCta: "预约到店",
+    faqKicker: "FAQ",
+    faqTitle: "尺寸与订制",
+    faq: [
+      {
+        q: "多少人吃选什么尺寸？",
+        a: "单层 5–12 寸，约供 2–30 人；双层/三层约供 10–80 人。每个款式页都有尺寸表。",
+      },
+      {
+        q: "可以订制蛋糕吗？",
+        a: "可以。打开订制，或把参考图发到脸书。我们会在一个工作日内确认口味、尺寸和日期。",
+      },
+      {
+        q: "送货吗？",
+        a: "默认 Fairfield 店自取。订制页可选 Hamilton 市区配送。",
+      },
+      {
+        q: "有哪些口味？",
+        a: "芝士慕斯奶油、鲜奶油、黄油奶油三大类，经典原味、抹茶、榴莲、芋头等二十多种。订制页按奶油种类列出全部。",
+      },
+    ],
   },
   visit: {
     kicker: "Visit",
