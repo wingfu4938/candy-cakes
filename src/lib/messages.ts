@@ -71,7 +71,6 @@ export type Messages = {
   order: {
     kicker: string;
     title: string;
-    lead: string;
     steps: Record<OrderStepKey, string>;
     howMany: string;
     howManyLead: string;
@@ -287,7 +286,6 @@ const en: Messages = {
   order: {
     kicker: "Order",
     title: "Order",
-    lead: "Choose size, design and flavor. Sending this is a request — we confirm on Facebook within a working day.",
     steps: { size: "Size", design: "Design", flavor: "Flavor", contact: "Contact" },
     howMany: "How many to feed",
     howManyLead:
@@ -623,7 +621,6 @@ const zh: Messages = {
   order: {
     kicker: "Commission",
     title: "订制",
-    lead: "选尺寸、款式和口味。送出后不是自动下单——主理人会在一个工作日内与你核对档期和过敏。",
     steps: { size: "尺寸", design: "款式", flavor: "口味", contact: "联系方式" },
     howMany: "几个人吃",
     howManyLead: "尺寸按人数来。吃不完也可以，蛋糕隔夜仍好。",
