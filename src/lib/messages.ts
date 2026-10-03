@@ -20,7 +20,6 @@ export type Messages = {
     closeMenu: string;
   };
   footer: {
-    blurb: string;
     atelier: string;
     book: string;
     hoursNote: string;
@@ -199,8 +198,6 @@ const en: Messages = {
     closeMenu: "Close menu",
   },
   footer: {
-    blurb:
-      "A private cake atelier in Hamilton. A few cakes a day, made only for yours.",
     atelier: "Atelier",
     book: "Booking",
     hoursNote: "By appointment",
@@ -425,7 +422,7 @@ const en: Messages = {
     story: [
       "We make custom cakes in Fairfield: birthdays, weddings, cartoon figures, fruit and floral. Asian baking, local fruit, Japanese flour when it matters.",
       "Fillings are made here. Tell us allergies. Wheat, eggs, dairy, nuts and soy are in the kitchen.",
-      "Pickup at Shop 4 / 97Z Heaphy Terrace. Message us on Facebook to lock a date.",
+      "Pickup at Shop 4 / 977 Heaphy Terrace. Message us on Facebook to lock a date.",
     ],
     values: [
       {
@@ -468,7 +465,7 @@ const en: Messages = {
     kicker: "Visit",
     title: "Come in",
     lead: "Pickup is at the Fairfield shop. Come in during open hours, or message us on Facebook to talk about a custom cake.",
-    address: "Candy Cakes, Shop 4 / 97Z Heaphy Terrace, Fairfield, Hamilton 3214",
+    address: "Candy Cakes, Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214",
     hours: "Tue 2–6pm · Wed–Fri 11am–6pm · Sat–Sun 9am–6pm",
     note: "Closed Mondays. Pickup at the Fairfield shop.",
     addressLabel: "Address",
@@ -516,7 +513,7 @@ const en: Messages = {
       order:
         "Open Commission, choose size, design and flavor. Sending it is a request; we confirm within a working day.",
       visit:
-        "Pickup is at Candy Cakes, Shop 4 / 97Z Heaphy Terrace, Fairfield, Hamilton 3214. Message us on Facebook if you need directions.",
+        "Pickup is at Candy Cakes, Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214. Message us on Facebook if you need directions.",
       flavors:
         "Kids, first birthday, piped, flowers, fruit, luck, elders, creative, wedding and cupcakes. Open Cakes to see them all.",
     },
@@ -543,7 +540,6 @@ const zh: Messages = {
     closeMenu: "关闭菜单",
   },
   footer: {
-    blurb: "Hamilton 一间私人定制蛋糕工坊。每天只做有限的几块，只为你的日子。",
     atelier: "工坊",
     book: "预约",
     hoursNote: "仅预约",
@@ -793,8 +789,8 @@ const zh: Messages = {
   visit: {
     kicker: "Visit",
     title: "到店",
-    lead: "可到 Fairfield 店取蛋糕。营业时间内欢迎进店，订制细节也可以走脸书客服。",
-    address: "Candy Cakes，Shop 4 / 97Z Heaphy Terrace，Fairfield，Hamilton 3214",
+    lead: "营业时间内欢迎进店，订制细节也可以走脸书客服。",
+    address: "Candy Cakes，Shop 4 / 977 Heaphy Terrace，Fairfield，Hamilton 3214",
     hours: "周二 14:00–18:00 · 周三至周五 11:00–18:00 · 周六周日 09:00–18:00",
     note: "周一休息。可到 Fairfield 店取蛋糕。",
     addressLabel: "地址",
@@ -842,7 +838,7 @@ const zh: Messages = {
       order:
         "打开订制，选尺寸、款式和口味。送出后是预约，我们会在一个工作日内确认。",
       visit:
-        "取蛋糕在 Candy Cakes，Shop 4 / 97Z Heaphy Terrace，Fairfield，Hamilton 3214。需要路线请走脸书客服。",
+        "取蛋糕在 Candy Cakes，Shop 4 / 977 Heaphy Terrace，Fairfield，Hamilton 3214。需要路线请走脸书客服。",
       flavors:
         "小孩款、周岁、裱花、鲜花、水果、财运、老人、创意、婚礼和杯子蛋糕。打开作品页看全部。",
     },
