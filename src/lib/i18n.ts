@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { create } from "zustand";
-import type { FinishId, OccasionId, SizeId } from "@/lib/catalog";
-import { getCake } from "@/lib/catalog";
+import type { CreamId, FinishId, OccasionId, SizeId } from "@/lib/catalog";
+import { getCake, sizeById } from "@/lib/catalog";
 import { messages, type Locale, type Messages } from "@/lib/messages";
 
 export type { Locale, Messages };
@@ -79,7 +79,25 @@ export function occasionCopy(copy: Messages, id: OccasionId) {
 }
 
 export function sizeCopy(copy: Messages, id: SizeId) {
-  return copy.sizes[id];
+  const base = sizeById(id);
+  return {
+    label: base?.label ?? id,
+    servings: copy.sizes[id]?.servings ?? base?.servings ?? "",
+    cm: base?.cm,
+  };
+}
+
+export function creamCopy(copy: Messages, id: CreamId) {
+  return copy.creams[id] ?? id;
+}
+
+export function tasteCopy(copy: Messages, id: string) {
+  return copy.tastes[id] ?? id;
+}
+
+export function tasteNoteCopy(copy: Messages, note: string | undefined) {
+  if (!note) return "";
+  return copy.tasteNotes[note] ?? "";
 }
 
 export function finishCopy(copy: Messages, id: FinishId) {
