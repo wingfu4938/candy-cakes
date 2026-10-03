@@ -100,6 +100,14 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     return lines.join("\n");
   }
 
+  function copySummary(c: Commission): void {
+    if (!navigator.clipboard?.writeText) return;
+    navigator.clipboard.writeText(orderSummaryText(c)).then(
+      () => setSummaryCopied(true),
+      () => setSummaryCopied(false),
+    );
+  }
+
   useEffect(() => {
     if (!prefills) return;
     const cake = getCake(prefills);
@@ -158,14 +166,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
       setSubmitted(result);
       setErrors([]);
       setSummaryCopied(false);
-      // Copy the order summary so the customer can paste it into Messenger.
-      const summary = orderSummaryText(result);
-      if (navigator.clipboard?.writeText) {
-        navigator.clipboard.writeText(summary).then(
-          () => setSummaryCopied(true),
-          () => setSummaryCopied(false),
-        );
-      }
+      copySummary(result);
       // Fire-and-forget: email the shop owner. The confirmation page shows
       // regardless — a notification failure must never block the customer.
       const cakeObj = result.flavor ? getCake(result.flavor) : undefined;
@@ -257,11 +258,31 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             })}
           </p>
         )}
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button asChild className="bg-[#0084ff] hover:bg-[#0073e0]">
-            <a href={VISIT.facebook} target="_blank" rel="noreferrer">
-              {copy.order.chatNow}
-            </a>
+        <div className="mt-6 rounded-lg border border-border bg-muted/40 p-4">
+          <p className="text-xs font-medium text-muted-foreground">
+            {copy.order.chatHint}
+          </p>
+          <pre className="mt-2 max-h-40 overflow-auto rounded bg-background p-3 text-xs leading-relaxed whitespace-pre-wrap">
+            {orderSummaryText(submitted)}
+          </pre>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-2"
+            onClick={() => copySummary(submitted)}
+          >
+            {summaryCopied ? copy.order.copiedHint : copy.order.copySummary}
+          </Button>
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button
+            className="bg-[#0084ff] hover:bg-[#0073e0]"
+            onClick={() => {
+              copySummary(submitted);
+              window.open(VISIT.facebook, "_blank", "noopener,noreferrer");
+            }}
+          >
+            {copy.order.chatNow}
           </Button>
           <Button
             onClick={() => {
@@ -276,9 +297,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             <Link to="/collection">{copy.order.backToCollection}</Link>
           </Button>
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">
-          {summaryCopied ? copy.order.copiedHint : copy.order.chatHint}
-        </p>
       </div>
     );
   }

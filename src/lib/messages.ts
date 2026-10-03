@@ -112,6 +112,7 @@ export type Messages = {
     chatNow: string;
     chatHint: string;
     copiedHint: string;
+    copySummary: string;
     errSize: string;
     errDesign: string;
     errCream: string;
@@ -303,6 +304,7 @@ const en: Messages = {
     chatNow: "Chat details on Facebook",
     chatHint: "Order details copied — paste and send in Messenger.",
     copiedHint: "Copied ✓",
+    copySummary: "Copy order details",
     errSize: "Please choose a size",
     errDesign: "Please choose a design",
     errCream: "Please choose a cream",
@@ -578,6 +580,7 @@ const zh: Messages = {
     chatNow: "去 Facebook 聊明细",
     chatHint: "订单明细已复制，打开 Messenger 粘贴发送即可。",
     copiedHint: "已复制 ✓",
+    copySummary: "复制订单明细",
     errSize: "请选择尺寸",
     errDesign: "请选择款式",
     errCream: "请选择奶油种类",
