@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { CakeImage } from "@/components/cake-image";
-import { CAKES, CATEGORY_IDS, KIDS_THEME_ORDER, type CategoryId, type KidsThemeId } from "@/lib/catalog";
+import { CAKES, CATEGORY_IDS, KIDS_THEME_ORDER, cakeNumber, type CategoryId, type KidsThemeId } from "@/lib/catalog";
 import { useCopy } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -117,13 +117,16 @@ function Collection() {
               key={cake.slug}
               type="button"
               onClick={() => setOpen(cake.slug)}
-              className="mb-2 block w-full break-inside-avoid overflow-hidden rounded-lg md:mb-3"
+              className="relative mb-2 block w-full break-inside-avoid overflow-hidden rounded-lg md:mb-3"
             >
               <CakeImage
                 src={cake.image}
                 alt={cakeAlt(cake)}
                 className="h-auto"
               />
+              <span className="absolute top-2 left-2 rounded-full bg-foreground/75 px-2 py-0.5 text-[11px] font-medium tracking-wide text-background">
+                {cakeNumber(cake)}
+              </span>
             </button>
           ))}
         </div>
