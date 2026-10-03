@@ -1,19 +1,24 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import {
+  type CreamId,
   type FinishId,
   type FlavorId,
   type OccasionId,
   type SizeId,
   leadDaysFor,
-  quotePrice,
 } from "@/lib/catalog";
 import { uid } from "@/lib/utils";
 
 export type Draft = {
   occasion: OccasionId | null;
   size: SizeId | null;
+  /** Chosen cake design (gallery slug). */
   flavor: FlavorId | null;
+  /** Cream type, e.g. "fresh-cream". */
+  cream: CreamId | null;
+  /** Taste id, e.g. "matcha". */
+  taste: string | null;
   finish: FinishId | null;
   inscription: string;
   date: string;
@@ -27,7 +32,6 @@ export type Draft = {
 export type Commission = Draft & {
   id: string;
   createdAt: string;
-  total: number;
   leadDays: number;
 };
 
@@ -43,6 +47,8 @@ const emptyDraft = (): Draft => ({
   occasion: null,
   size: null,
   flavor: null,
+  cream: null,
+  taste: null,
   finish: "velvet",
   inscription: "",
   date: "",
@@ -73,15 +79,22 @@ export const useOrderStore = create<State>()(
       commissions: [],
       submitCommission: () => {
         const { draft } = get();
-        const total = quotePrice(draft);
-        if (!total || !draft.occasion || !draft.size || !draft.flavor || !draft.date || !draft.name || !draft.phone) {
+        if (
+          !draft.occasion ||
+          !draft.size ||
+          !draft.flavor ||
+          !draft.cream ||
+          !draft.taste ||
+          !draft.date ||
+          !draft.name ||
+          !draft.phone
+        ) {
           return null;
         }
         const commission: Commission = {
           ...draft,
           id: uid(),
           createdAt: new Date().toISOString(),
-          total,
           leadDays: leadDaysFor(draft),
         };
         set((s) => ({
