@@ -23,6 +23,10 @@ export type Draft = {
   email: string;
   /** Always pickup; kept for record shape. */
   delivery: "pickup";
+  /** Chosen pickup day, YYYY-MM-DD. */
+  pickupDate: string;
+  /** Chosen pickup window, e.g. "13:00–15:00". */
+  pickupWindow: string;
 };
 
 export type Commission = Draft & {
@@ -50,6 +54,8 @@ const emptyDraft = (): Draft => ({
   phone: "",
   email: "",
   delivery: "pickup",
+  pickupDate: "",
+  pickupWindow: "",
 });
 
 type State = {
@@ -78,7 +84,9 @@ export const useOrderStore = create<State>()(
           !draft.cream ||
           !draft.taste ||
           !draft.name ||
-          !draft.phone
+          !draft.phone ||
+          !draft.pickupDate ||
+          !draft.pickupWindow
         ) {
           return null;
         }

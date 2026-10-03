@@ -168,3 +168,36 @@ export const VISIT = {
   facebookPage: "https://www.facebook.com/CandyCakesNZ",
   maps: "https://maps.google.com/?q=Shop+4+977+Heaphy+Terrace+Fairfield+Hamilton+3214",
 };
+
+/**
+ * Pickup time windows for a given date (YYYY-MM-DD), based on opening hours:
+ * Tue 2–6pm, Wed–Fri 11am–6pm, Sat–Sun 9am–6pm, Mon closed.
+ * Broad windows (not exact times) spread pickups and leave the exact
+ * handover to the Messenger chat. Returns [] on Mondays.
+ */
+export function pickupWindowsFor(dateStr: string): string[] {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return [];
+  const d = new Date(`${dateStr}T12:00:00`);
+  if (Number.isNaN(d.getTime())) return [];
+  const day = d.getDay(); // 0=Sun … 6=Sat
+  if (day === 1) return []; // Monday closed
+  if (day === 2) return ["14:00–16:00", "16:00–18:00"]; // Tue 2–6pm
+  if (day === 6 || day === 0)
+    return ["09:00–11:00", "11:00–13:00", "13:00–15:00", "15:00–18:00"];
+  return ["11:00–13:00", "13:00–15:00", "15:00–18:00"]; // Wed–Fri
+}
+
+/** YYYY-MM-DD for a date `days` from today (local time). */
+export function dateStrFromToday(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+/** True when the given YYYY-MM-DD is a Monday (shop closed). */
+export function isMonday(dateStr: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+  return new Date(`${dateStr}T12:00:00`).getDay() === 1;
+}

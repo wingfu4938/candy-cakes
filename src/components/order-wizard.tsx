@@ -15,8 +15,11 @@ import {
   TIERED_SIZES,
   VISIT,
   cakeNumber,
+  dateStrFromToday,
   getCake,
+  isMonday,
   leadDaysFor,
+  pickupWindowsFor,
   type CategoryId,
   type CreamId,
   type FlavorId,
@@ -97,6 +100,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (c.inscription.trim()) lines.push(`写字 Inscription: ${c.inscription.trim()}`);
     if (c.notes.trim()) lines.push(`备注 Notes: ${c.notes.trim()}`);
     lines.push(`姓名 Name: ${c.name} / 电话 Phone: ${c.phone}`);
+    lines.push(`取货 Pickup: ${c.pickupDate} ${c.pickupWindow}`);
     if (c.flavor) {
       const origin =
         typeof window !== "undefined" ? window.location.origin : "";
@@ -154,6 +158,9 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     const e: string[] = [];
     if (!current.name.trim()) e.push(copy.order.errName);
     if (!/^[\d\s+-]{8,}$/.test(current.phone.trim())) e.push(copy.order.errPhone);
+    if (!current.pickupDate) e.push(copy.order.errPickupDate);
+    else if (isMonday(current.pickupDate)) e.push(copy.order.errMondayClosed);
+    if (!current.pickupWindow) e.push(copy.order.errPickupWindow);
     if (
       !current.size ||
       !current.flavor ||
@@ -176,9 +183,6 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
       // regardless — a notification failure must never block the customer.
       const cakeObj = result.flavor ? getCake(result.flavor) : undefined;
       const cakeName = result.flavor ? cakeCopy(copy, result.flavor) : undefined;
-      const pickupDate = new Date(
-        Date.now() + result.leadDays * 24 * 60 * 60 * 1000,
-      );
       notifyOrderFn({
         data: {
           orderId: result.id,
@@ -198,10 +202,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           tasteLabel: result.taste ? tasteCopy(copy, result.taste) : "",
           inscription: result.inscription,
           notes: result.notes,
-          pickupHint:
-            result.leadDays <= 0
-              ? (locale === "zh" ? "可当天取" : "Same-day pickup")
-              : `${pickupDate.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-NZ")} (${result.leadDays}天 / days)`,
+          pickupHint: `${result.pickupDate} ${result.pickupWindow}`,
           locale,
         },
       }).catch((err) => {
@@ -253,6 +254,14 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             label={copy.order.rowTaste}
             value={
               submitted.taste ? tasteCopy(copy, submitted.taste) : undefined
+            }
+          />
+          <Row
+            label={copy.order.rowPickup}
+            value={
+              submitted.pickupDate
+                ? `${submitted.pickupDate} ${submitted.pickupWindow}`
+                : undefined
             }
           />
         </dl>
@@ -549,6 +558,40 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                   {copy.order.pickup}
                 </p>
               </div>
+              <Field label={copy.order.pickupDate} htmlFor="pickup-date">
+                <Input
+                  id="pickup-date"
+                  type="date"
+                  min={dateStrFromToday(leadDaysFor(draft))}
+                  max={dateStrFromToday(60)}
+                  value={draft.pickupDate}
+                  onChange={(e) =>
+                    setDraft({ pickupDate: e.target.value, pickupWindow: "" })
+                  }
+                />
+              </Field>
+              <div>
+                <p className="mb-2 text-sm font-medium">
+                  {copy.order.pickupWindow}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {pickupWindowsFor(draft.pickupDate).map((w) => (
+                    <button
+                      key={w}
+                      type="button"
+                      onClick={() => setDraft({ pickupWindow: w })}
+                      className={cn(
+                        "rounded-md border px-3 py-2 text-sm transition-colors",
+                        draft.pickupWindow === w
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-card hover:border-primary",
+                      )}
+                    >
+                      {w}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <Field label={copy.order.inscription} htmlFor="inscription">
                 <Input
                   id="inscription"
@@ -642,6 +685,14 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             label={copy.order.rowTaste}
             value={
               draft.taste ? tasteCopy(copy, draft.taste) : copy.order.unset
+            }
+          />
+          <Row
+            label={copy.order.rowPickup}
+            value={
+              draft.pickupDate
+                ? `${draft.pickupDate}${draft.pickupWindow ? ` ${draft.pickupWindow}` : ""}`
+                : copy.order.unset
             }
           />
           <Row

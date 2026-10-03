@@ -89,6 +89,9 @@ export type Messages = {
     email: string;
     delivery: string;
     pickup: string;
+    pickupDate: string;
+    pickupWindow: string;
+    rowPickup: string;
     inscription: string;
     inscriptionPh: string;
     notes: string;
@@ -120,6 +123,9 @@ export type Messages = {
     errName: string;
     errPhone: string;
     errIncomplete: string;
+    errPickupDate: string;
+    errPickupWindow: string;
+    errMondayClosed: string;
   };
   categories: Record<CategoryId, string>;
   themes: Record<KidsThemeId, string>;
@@ -279,6 +285,9 @@ const en: Messages = {
     email: "Email (optional)",
     delivery: "Handover",
     pickup: "Collect at Candy Cakes, Fairfield",
+    pickupDate: "Pickup date",
+    pickupWindow: "Pickup time",
+    rowPickup: "Pickup",
     inscription: "Words on the cake (optional)",
     inscriptionPh: "24 characters at most",
     notes: "Notes / change requests (optional)",
@@ -312,6 +321,9 @@ const en: Messages = {
     errName: "Please leave a name",
     errPhone: "Please leave a valid phone number",
     errIncomplete: "Earlier steps are still open",
+    errPickupDate: "Please choose a pickup date",
+    errPickupWindow: "Please choose a pickup time",
+    errMondayClosed: "We're closed on Mondays — please pick another day",
   },
   categories: {
     kids: "Kids",
@@ -556,6 +568,9 @@ const zh: Messages = {
     email: "邮箱（选填）",
     delivery: "交付",
     pickup: "Fairfield 店自取",
+    pickupDate: "取货日期",
+    pickupWindow: "取货时间段",
+    rowPickup: "取货",
     inscription: "蛋糕上的字（选填）",
     inscriptionPh: "最多二十四字",
     notes: "备注 / 调整需求（选填）",
@@ -588,6 +603,9 @@ const zh: Messages = {
     errName: "请留下姓名",
     errPhone: "请留下有效电话",
     errIncomplete: "前面的选择还不完整",
+    errPickupDate: "请选择取货日期",
+    errPickupWindow: "请选择取货时间段",
+    errMondayClosed: "周一休息，请另选一天",
   },
   categories: {
     kids: "小孩款",
