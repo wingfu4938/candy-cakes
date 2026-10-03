@@ -12,15 +12,12 @@ export type Messages = {
   nav: {
     collection: string;
     order: string;
-    atelier: string;
-    visit: string;
     book: string;
     language: string;
     openMenu: string;
     closeMenu: string;
   };
   footer: {
-    atelier: string;
     book: string;
     hoursNote: string;
     copyright: string;
@@ -121,44 +118,6 @@ export type Messages = {
   creams: Record<CreamId, string>;
   tastes: Record<string, string>;
   tasteNotes: Record<string, string>;
-  atelier: {
-    kicker: string;
-    title: string;
-    heroAlt: string;
-    role: string;
-    chef: string;
-    story: string[];
-    values: { title: string; body: string }[];
-    visitLead: string;
-    visitCta: string;
-    faqKicker: string;
-    faqTitle: string;
-    faq: { q: string; a: string }[];
-  };
-  visit: {
-    kicker: string;
-    title: string;
-    lead: string;
-    address: string;
-    hours: string;
-    note: string;
-    addressLabel: string;
-    hoursLabel: string;
-    contactLabel: string;
-    cakeAlt: string;
-    formTitle: string;
-    formLead: string;
-    name: string;
-    phone: string;
-    message: string;
-    messagePh: string;
-    send: string;
-    error: string;
-    doneKicker: string;
-    doneTitle: string;
-    doneLead: string;
-    again: string;
-  };
   chat: {
     open: string;
     close: string;
@@ -189,15 +148,12 @@ const en: Messages = {
   nav: {
     collection: "Cakes",
     order: "Order",
-    atelier: "About",
-    visit: "Visit",
     book: "Order a cake",
     language: "Language",
     openMenu: "Open menu",
     closeMenu: "Close menu",
   },
   footer: {
-    atelier: "Atelier",
     book: "Booking",
     hoursNote: "By appointment",
     copyright: "By appointment only",
@@ -279,7 +235,7 @@ const en: Messages = {
     size: "Size",
     serves: "Serves",
     sameCake: "Order this look",
-    talk: "Visit the shop",
+    talk: "Facebook chat",
     others: "More cakes",
     close: "Close",
   },
@@ -411,79 +367,6 @@ const en: Messages = {
     "sweet-or-salty": "sweet or salty",
     "almonds-option": "with almonds or no almonds",
   },
-  atelier: {
-    kicker: "About",
-    title: "The shop",
-    heroAlt: "Cakes in the Candy Cakes window",
-    role: "Candy Cakes",
-    chef: "Fairfield, Hamilton",
-    story: [
-      "We make custom cakes in Fairfield: birthdays, weddings, cartoon figures, fruit and floral. Asian baking, local fruit, Japanese flour when it matters.",
-      "Fillings are made here. Tell us allergies. Wheat, eggs, dairy, nuts and soy are in the kitchen.",
-      "Pickup at Shop 4 / 977 Heaphy Terrace. Message us on Facebook to lock a date.",
-    ],
-    values: [
-      {
-        title: "Handmade",
-        body: "Cream, fruit and figures are finished the day you collect. Nothing sits in a case overnight.",
-      },
-      {
-        title: "Notice",
-        body: "Most cakes need two days. Cartoon figures three. Weddings and sugar flowers a week.",
-      },
-      {
-        title: "Pickup",
-        body: "Come in during open hours. Hamilton delivery is available on the order form.",
-      },
-    ],
-    visitLead: "The shop is small. For a custom cake, order online or message Facebook first.",
-    visitCta: "Visit us",
-    faqKicker: "FAQ",
-    faqTitle: "Sizes and ordering",
-    faq: [
-      {
-        q: "What size for how many people?",
-        a: "Single tiers run 5 to 12 inch, feeding about 2 to 30 people. Double and triple tiers feed about 10 to 80. The size table on each cake page lists them all.",
-      },
-      {
-        q: "Can I order a custom cake?",
-        a: "Yes. Open Order, or send a photo on Facebook. We confirm flavour, size and the date within a working day.",
-      },
-      {
-        q: "Do you deliver?",
-        a: "Pickup in Fairfield is default. Hamilton delivery can be chosen on the order form.",
-      },
-      {
-        q: "What flavours do you make?",
-        a: "Cheese mousse cream, fresh cream and butter cream, with over twenty fillings from classic plain and matcha to durian and taro. The order form lists them all by cream.",
-      },
-    ],
-  },
-  visit: {
-    kicker: "Visit",
-    title: "Come in",
-    lead: "Pickup is at the Fairfield shop. Come in during open hours, or message us on Facebook to talk about a custom cake.",
-    address: "Candy Cakes, Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214",
-    hours: "Tue 2–6pm · Wed–Fri 11am–6pm · Sat–Sun 9am–6pm",
-    note: "Closed Mondays. Pickup at the Fairfield shop.",
-    addressLabel: "Address",
-    hoursLabel: "Hours",
-    contactLabel: "Contact",
-    cakeAlt: "Yuzu cake in the atelier",
-    formTitle: "Book a conversation",
-    formLead: "About twenty minutes. Bring a reference, or bring nothing.",
-    name: "Name",
-    phone: "Phone",
-    message: "What to talk about (optional)",
-    messagePh: "A wedding date, a headcount, or just a look around.",
-    send: "Send",
-    error: "Please leave a name and a valid phone number.",
-    doneKicker: "Received",
-    doneTitle: "{name}, we will write back",
-    doneLead:
-      "Within a working day we confirm by Facebook. If you are only collecting a cake, choose pickup on the commission page.",
-    again: "Leave another note",
-  },
   chat: {
     open: "Facebook chat",
     close: "Close chat",
@@ -530,15 +413,12 @@ const zh: Messages = {
   nav: {
     collection: "作品",
     order: "订制",
-    atelier: "工坊",
-    visit: "到店",
     book: "预约订制",
     language: "语言",
     openMenu: "打开菜单",
     closeMenu: "关闭菜单",
   },
   footer: {
-    atelier: "工坊",
     book: "预约",
     hoursNote: "仅预约",
     copyright: "仅预约",
@@ -614,7 +494,7 @@ const zh: Messages = {
     size: "尺寸",
     serves: "人数",
     sameCake: "订这一款",
-    talk: "到店对谈",
+    talk: "脸书客服",
     others: "其它款式",
     close: "关闭",
   },
@@ -743,70 +623,6 @@ const zh: Messages = {
   tasteNotes: {
     "sweet-or-salty": "甜或咸",
     "almonds-option": "加杏仁或不加杏仁",
-  },
-  atelier: {
-    kicker: "Atelier",
-    title: "工坊",
-    heroAlt: "Candy Cakes 窗边的蛋糕",
-    role: "主理人",
-    chef: "林栖",
-    story: [
-      "在东京学过一年糖艺，在巴黎的厨房里做过巧克力。在 Hamilton，只做一个决定：每天只做有限的几块蛋糕。",
-      "不加盟，不零售柜，不提前做好放冷藏。你订下的那一天，我们才开始称粉、温黄油、煮果冻。",
-      "工坊在 Fairfield 的 Heaphy Terrace。来取蛋糕，坐下，再谈蛋糕。",
-    ],
-    values: [
-      { title: "时令", body: "水果跟季节走。过季的草莓，我们宁可不做莓时。" },
-      { title: "限量", body: "一天不超过八块。糖花婚礼另算，一周两场。" },
-      { title: "对谈", body: "每块蛋糕都先见人。过敏、酒、小孩、长辈，都要问清楚。" },
-    ],
-    visitLead: "想看糖艺或试味道，请先预约到店。我们不接待未经约定的访客，厨房很小。",
-    visitCta: "预约到店",
-    faqKicker: "FAQ",
-    faqTitle: "尺寸与订制",
-    faq: [
-      {
-        q: "多少人吃选什么尺寸？",
-        a: "单层 5–12 寸，约供 2–30 人；双层/三层约供 10–80 人。每个款式页都有尺寸表。",
-      },
-      {
-        q: "可以订制蛋糕吗？",
-        a: "可以。打开订制，或把参考图发到脸书。我们会在一个工作日内确认口味、尺寸和日期。",
-      },
-      {
-        q: "送货吗？",
-        a: "默认 Fairfield 店自取。订制页可选 Hamilton 市区配送。",
-      },
-      {
-        q: "有哪些口味？",
-        a: "芝士慕斯奶油、鲜奶油、黄油奶油三大类，经典原味、抹茶、榴莲、芋头等二十多种。订制页按奶油种类列出全部。",
-      },
-    ],
-  },
-  visit: {
-    kicker: "Visit",
-    title: "到店",
-    lead: "营业时间内欢迎进店，订制细节也可以走脸书客服。",
-    address: "Candy Cakes，Shop 4 / 977 Heaphy Terrace，Fairfield，Hamilton 3214",
-    hours: "周二 14:00–18:00 · 周三至周五 11:00–18:00 · 周六周日 09:00–18:00",
-    note: "周一休息。可到 Fairfield 店取蛋糕。",
-    addressLabel: "地址",
-    hoursLabel: "时间",
-    contactLabel: "联络",
-    cakeAlt: "工坊里的青柚蛋糕",
-    formTitle: "预约对谈",
-    formLead: "大约二十分钟。可以带参考图，也可以什么都不带。",
-    name: "称呼",
-    phone: "电话",
-    message: "想谈什么（选填）",
-    messagePh: "婚礼日期、人数，或只是想来看看。",
-    send: "送出预约",
-    error: "请留下姓名和有效电话。",
-    doneKicker: "已收下",
-    doneTitle: "{name}，我们会回你",
-    doneLead:
-      "一个工作日内我们会在脸书回复。若只是取蛋糕，订制页里选「Fairfield 店自取」即可。",
-    again: "再留一条",
   },
   chat: {
     open: "脸书客服",
