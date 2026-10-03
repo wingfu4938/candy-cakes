@@ -2,33 +2,12 @@ import { GALLERY, KIDS_THEME_ORDER, type CategoryId, type GalleryCake, type Kids
 
 export type { CategoryId, GalleryCake, KidsThemeId };
 export { KIDS_THEME_ORDER };
-export type OccasionId =
-  | "wedding"
-  | "birthday"
-  | "anniversary"
-  | "seasonal"
-  | "other";
-
 export type SizeId = string;
 export type SizeGroup = "single" | "tiered";
 export type FlavorId = string;
-export type FinishId =
-  | "velvet"
-  | "buttercream"
-  | "fruit"
-  | "sugar-flower"
-  | "naked";
 export type CreamId = "cheese-mousse" | "fresh-cream" | "butter-cream";
 
 export type Cake = GalleryCake;
-
-export const OCCASION_IDS: OccasionId[] = [
-  "wedding",
-  "birthday",
-  "anniversary",
-  "seasonal",
-  "other",
-];
 
 export const CATEGORY_IDS: CategoryId[] = [
   "kids",
@@ -74,16 +53,6 @@ export const SIZES: CakeSize[] = [
 
 export const SINGLE_TIER_SIZES = SIZES.filter((s) => s.group === "single");
 export const TIERED_SIZES = SIZES.filter((s) => s.group === "tiered");
-
-export const FINISHES: {
-  id: FinishId;
-}[] = [
-  { id: "velvet" },
-  { id: "buttercream" },
-  { id: "fruit" },
-  { id: "sugar-flower" },
-  { id: "naked" },
-];
 
 export const CREAM_TYPES: { id: CreamId }[] = [
   { id: "cheese-mousse" },
@@ -179,24 +148,13 @@ export function sizeById(id: SizeId | null | undefined) {
   return SIZES.find((s) => s.id === id);
 }
 
-export function occasionFor(category: CategoryId): OccasionId {
-  if (category === "wed") return "wedding";
-  if (category === "fruit" || category === "fresh") return "anniversary";
-  if (category === "boss" || category === "old") return "other";
-  return "birthday";
-}
-
 export function leadDaysFor(input: {
-  occasion: OccasionId | null;
-  finish: FinishId | null;
   flavor: FlavorId | null;
 }) {
   let days = 2;
   const cake = input.flavor ? getCake(input.flavor) : undefined;
   if (cake?.category === "wed") days = 7;
   if (cake && ["kids", "baby", "cre"].includes(cake.category)) days = Math.max(days, 3);
-  if (input.occasion === "wedding") days = Math.max(days, 7);
-  if (input.finish === "sugar-flower") days = Math.max(days, 7);
   return days;
 }
 
