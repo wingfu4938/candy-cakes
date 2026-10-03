@@ -20,6 +20,7 @@ export const CATEGORY_IDS: CategoryId[] = [
   "fresh",
   "fruit",
   "boss",
+  "lady",
   "old",
   "cre",
   "wed",
