@@ -24,8 +24,6 @@ export function FacebookChat() {
     <div className="pointer-events-none fixed right-4 bottom-24 z-50 flex flex-col items-end gap-3 md:right-6">
       <a
         href={VISIT.facebook}
-        target="_blank"
-        rel="noopener noreferrer"
         title={copy.chat.facebookHint}
         aria-label={copy.chat.open}
         className="pointer-events-auto inline-flex h-14 items-center gap-2 rounded-full bg-facebook px-4 text-sm font-medium text-facebook-foreground shadow-[var(--shadow-border)] transition-transform duration-150 ease-out active:scale-[0.96]"
