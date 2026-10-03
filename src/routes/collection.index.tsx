@@ -48,9 +48,6 @@ function Collection() {
       <h1 className="mt-3 font-display text-display text-foreground">
         {copy.collection.title}
       </h1>
-      <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-        {copy.collection.lead}
-      </p>
 
       <div className="mt-8 flex gap-2 overflow-x-auto pb-1">
         {filters.map((f) => (
