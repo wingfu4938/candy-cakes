@@ -19,6 +19,7 @@ import {
   type CategoryId,
   type CreamId,
   type FlavorId,
+  type OrderStepKey,
   type SizeId,
 } from "@/lib/catalog";
 import {
@@ -70,7 +71,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
   const draft = useOrderStore((s) => s.draft);
   const setDraft = useOrderStore((s) => s.setDraft);
   const submitCommission = useOrderStore((s) => s.submitCommission);
-  const [step, setStep] = useState(0);
+  const [stepIdx, setStepIdx] = useState(0);
   const [submitted, setSubmitted] = useState<Commission | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [styleFilter, setStyleFilter] = useState<CategoryId | "all">("all");
@@ -83,25 +84,32 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     setStyleFilter(cake.category);
   }, [prefills, setDraft]);
 
+  // When coming from a cake detail page ("order this look"), the design is
+  // already chosen, so the design step is skipped entirely.
+  const designPrefilled = !!(prefills && getCake(prefills));
+  const stepKeys: OrderStepKey[] = designPrefilled
+    ? ["size", "flavor", "contact"]
+    : ["size", "design", "flavor", "contact"];
+  const stepKey = stepKeys[stepIdx];
+
   const lead = leadDaysFor(draft);
 
   const flavorCake = draft.flavor ? getCake(draft.flavor) : undefined;
   const flavorText = flavorCake ? cakeCopy(copy, flavorCake.slug) : undefined;
-  const steps = copy.order.steps;
 
   function next() {
     const current = useOrderStore.getState().draft;
     const e: string[] = [];
-    if (step === 0 && !current.size) e.push(copy.order.errSize);
-    if (step === 1 && !current.flavor) e.push(copy.order.errDesign);
-    if (step === 2 && !current.cream) e.push(copy.order.errCream);
-    if (step === 2 && !current.taste) e.push(copy.order.errTaste);
+    if (stepKey === "size" && !current.size) e.push(copy.order.errSize);
+    if (stepKey === "design" && !current.flavor) e.push(copy.order.errDesign);
+    if (stepKey === "flavor" && !current.cream) e.push(copy.order.errCream);
+    if (stepKey === "flavor" && !current.taste) e.push(copy.order.errTaste);
     if (e.length) {
       setErrors(e);
       return;
     }
     setErrors([]);
-    setStep((s) => Math.min(s + 1, steps.length - 1));
+    setStepIdx((s) => Math.min(s + 1, stepKeys.length - 1));
   }
 
   function submit() {
@@ -185,7 +193,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           <Button
             onClick={() => {
               setSubmitted(null);
-              setStep(0);
+              setStepIdx(0);
             }}
           >
             {copy.order.another}
@@ -202,32 +210,32 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
       <div>
         <ol className="mb-8 flex gap-1 overflow-x-auto">
-          {steps.map((label, i) => (
-            <li key={label} className="flex min-w-0 flex-1 items-center gap-1">
+          {stepKeys.map((key, i) => (
+            <li key={key} className="flex min-w-0 flex-1 items-center gap-1">
               <button
                 type="button"
-                onClick={() => i < step && setStep(i)}
+                onClick={() => i < stepIdx && setStepIdx(i)}
                 className={cn(
                   "flex h-11 w-full items-center justify-center gap-2 rounded-md px-2 text-xs transition-colors duration-150",
-                  i === step
+                  i === stepIdx
                     ? "bg-foreground text-background"
-                    : i < step
+                    : i < stepIdx
                       ? "bg-muted text-foreground"
                       : "bg-muted/60 text-muted-foreground",
                 )}
               >
-                {i < step ? (
+                {i < stepIdx ? (
                   <Check className="size-3.5" />
                 ) : (
                   <span className="tabular-nums">{i + 1}</span>
                 )}
-                <span className="hidden sm:inline">{label}</span>
+                <span className="hidden sm:inline">{copy.order.steps[key]}</span>
               </button>
             </li>
           ))}
         </ol>
 
-        {step === 0 && (
+        {stepKey === "size" && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
               {copy.order.howMany}
@@ -272,7 +280,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 1 && (
+        {stepKey === "design" && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
               {copy.order.design}
@@ -335,7 +343,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 2 && (
+        {stepKey === "flavor" && (
           <fieldset>
             <legend className="font-display text-title text-foreground">
               {copy.order.taste}
@@ -408,7 +416,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           </fieldset>
         )}
 
-        {step === 3 && (
+        {stepKey === "contact" && (
           <div>
             <h2 className="font-display text-title text-foreground">
               {copy.order.contact}
@@ -482,16 +490,16 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           <Button
             type="button"
             variant="ghost"
-            disabled={step === 0}
+            disabled={stepIdx === 0}
             onClick={() => {
               setErrors([]);
-              setStep((s) => Math.max(0, s - 1));
+              setStepIdx((s) => Math.max(0, s - 1));
             }}
           >
             <ArrowLeft className="size-4" />
             {copy.order.back}
           </Button>
-          {step < steps.length - 1 ? (
+          {stepIdx < stepKeys.length - 1 ? (
             <Button type="button" onClick={next}>
               {copy.order.next}
               <ArrowRight className="size-4" />
