@@ -90,9 +90,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-3 md:px-8 md:py-16">
           <div>
             <BrandLockup />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              {copy.footer.blurb}
-            </p>
           </div>
           <div>
             <p className="font-sans text-xs tracking-kicker text-muted-foreground uppercase">
