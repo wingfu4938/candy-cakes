@@ -28,9 +28,6 @@ function OrderPage() {
       <h1 className="mt-3 font-display text-display text-foreground">
         {copy.order.title}
       </h1>
-      <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-        {copy.order.lead}
-      </p>
       <div className="mt-10">
         <OrderWizard prefills={cake} />
       </div>
