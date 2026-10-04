@@ -65,28 +65,6 @@ export const getSlotCountsFn = createServerFn({ method: "POST" })
   });
 
 /**
- * TEMPORARY admin helper: delete test orders (customer_name = '档期测试').
- * Remove after the 2026-10-04 slot-limit verification cleanup.
- */
-export const deleteTestOrdersFn = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => data as { confirm: string })
-  .handler(async ({ data }) => {
-    if (data.confirm !== "delete-test-orders") {
-      return { ok: false as const, reason: "not-confirmed" as const };
-    }
-    const sql = await getSql();
-    const rows = await sql<{ n: number }>`
-      WITH deleted AS (
-        DELETE FROM shop_orders
-        WHERE customer_name = '档期测试'
-        RETURNING id
-      )
-      SELECT COUNT(*)::int AS n FROM deleted
-    `;
-    return { ok: true as const, deleted: rows[0]?.n ?? 0 };
-  });
-
-/**
  * Record an order, enforcing slot capacity atomically: the INSERT only
  * happens when the order's 30-min bucket still has room (single statement,
  * so two simultaneous submissions can't both slip through).

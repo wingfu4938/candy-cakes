@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminCleanupRouteImport } from './routes/admin-cleanup'
 import { Route as CollectionRouteImport } from './routes/collection'
 import { Route as OrderRouteImport } from './routes/order'
 import { Route as CollectionIndexRouteImport } from './routes/collection.index'
@@ -19,11 +18,6 @@ import { Route as CollectionSlugRouteImport } from './routes/collection.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminCleanupRoute = AdminCleanupRouteImport.update({
-  id: '/admin-cleanup',
-  path: '/admin-cleanup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollectionRoute = CollectionRouteImport.update({
@@ -49,7 +43,6 @@ const CollectionSlugRoute = CollectionSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin-cleanup': typeof AdminCleanupRoute
   '/collection': typeof CollectionRouteWithChildren
   '/order': typeof OrderRoute
   '/collection/$slug': typeof CollectionSlugRoute
@@ -57,7 +50,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin-cleanup': typeof AdminCleanupRoute
   '/order': typeof OrderRoute
   '/collection/$slug': typeof CollectionSlugRoute
   '/collection': typeof CollectionIndexRoute
@@ -65,7 +57,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin-cleanup': typeof AdminCleanupRoute
   '/collection': typeof CollectionRouteWithChildren
   '/order': typeof OrderRoute
   '/collection/$slug': typeof CollectionSlugRoute
@@ -74,18 +65,12 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/admin-cleanup'
-    | '/collection'
-    | '/order'
-    | '/collection/$slug'
-    | '/collection/'
+    '/' | '/collection' | '/order' | '/collection/$slug' | '/collection/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin-cleanup' | '/order' | '/collection/$slug' | '/collection'
+  to: '/' | '/order' | '/collection/$slug' | '/collection'
   id:
     | '__root__'
     | '/'
-    | '/admin-cleanup'
     | '/collection'
     | '/order'
     | '/collection/$slug'
@@ -94,7 +79,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminCleanupRoute: typeof AdminCleanupRoute
   CollectionRoute: typeof CollectionRouteWithChildren
   OrderRoute: typeof OrderRoute
 }
@@ -106,13 +90,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin-cleanup': {
-      id: '/admin-cleanup'
-      path: '/admin-cleanup'
-      fullPath: '/admin-cleanup'
-      preLoaderRoute: typeof AdminCleanupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collection': {
@@ -162,7 +139,6 @@ const CollectionRouteWithChildren = CollectionRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminCleanupRoute: AdminCleanupRoute,
   CollectionRoute: CollectionRouteWithChildren,
   OrderRoute: OrderRoute,
 }
