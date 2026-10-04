@@ -32,7 +32,8 @@ export type OrderNotifyInput = {
   sizeLabel: string;
   creamLabel: string;
   tasteLabel: string;
-  inscription: string;
+  cakeName: string;
+  cakeAge: string;
   notes: string;
   pickupHint: string;
   locale: string;
@@ -81,7 +82,8 @@ export const notifyOrderFn = createServerFn({ method: "POST" })
     ${row("尺寸", "Size", data.sizeLabel)}
     ${row("奶油种类", "Cream", data.creamLabel)}
     ${row("口味", "Flavor", data.tasteLabel)}
-    ${row("蛋糕上的字", "Inscription", data.inscription)}
+    ${row("蛋糕上的名字", "Name on cake", data.cakeName)}
+    ${row("蛋糕上的岁数", "Age on cake", data.cakeAge)}
     ${row("备注", "Notes", data.notes)}
     ${row("取货", "Pickup", data.pickupHint)}
   </table>

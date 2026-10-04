@@ -92,8 +92,10 @@ export type Messages = {
     pickupDate: string;
     pickupWindow: string;
     rowPickup: string;
-    inscription: string;
-    inscriptionPh: string;
+    cakeName: string;
+    cakeNamePh: string;
+    cakeAge: string;
+    cakeAgePh: string;
     notes: string;
     notesPh: string;
     back: string;
@@ -109,7 +111,8 @@ export type Messages = {
     rowDesign: string;
     rowCream: string;
     rowTaste: string;
-    inscriptionLine: string;
+    cakeNameLine: string;
+    cakeAgeLine: string;
     another: string;
     backToCollection: string;
     chatNow: string;
@@ -288,8 +291,10 @@ const en: Messages = {
     pickupDate: "Pickup date",
     pickupWindow: "Pickup time",
     rowPickup: "Pickup",
-    inscription: "Words on the cake (optional)",
-    inscriptionPh: "24 characters at most",
+    cakeName: "Name on the cake (optional)",
+    cakeNamePh: "E.g. Emma",
+    cakeAge: "Age on the cake (optional)",
+    cakeAgePh: "E.g. 5",
     notes: "Notes / change requests (optional)",
     notesPh:
       "E.g. pink bow instead of blue, skip the pearls… allergies, dislikes…",
@@ -307,7 +312,8 @@ const en: Messages = {
     rowDesign: "Design",
     rowCream: "Cream",
     rowTaste: "Flavor",
-    inscriptionLine: "Inscription: {text}",
+    cakeNameLine: "Name on cake: {text}",
+    cakeAgeLine: "Age on cake: {text}",
     another: "Order another",
     backToCollection: "Back to cakes",
     chatNow: "Chat details on Facebook",
@@ -571,8 +577,10 @@ const zh: Messages = {
     pickupDate: "取货日期",
     pickupWindow: "取货时间段",
     rowPickup: "取货",
-    inscription: "蛋糕上的字（选填）",
-    inscriptionPh: "最多二十四字",
+    cakeName: "蛋糕上的名字（选填）",
+    cakeNamePh: "比如：Emma",
+    cakeAge: "蛋糕上的岁数（选填）",
+    cakeAgePh: "比如：5",
     notes: "备注 / 调整需求（选填）",
     notesPh: "比如：蝴蝶结换粉色、去掉珍珠装饰；或写过敏、忌口…",
     back: "上一步",
@@ -589,7 +597,8 @@ const zh: Messages = {
     rowDesign: "款式",
     rowCream: "奶油种类",
     rowTaste: "口味",
-    inscriptionLine: "写字：{text}",
+    cakeNameLine: "写名字：{text}",
+    cakeAgeLine: "写岁数：{text}",
     another: "再订一块",
     backToCollection: "回作品集",
     chatNow: "去 Facebook 聊明细",

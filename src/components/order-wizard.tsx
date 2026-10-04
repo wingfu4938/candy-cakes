@@ -97,7 +97,8 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
       `${copy.order.rowCream} Cream: ${c.cream ? creamCopy(copy, c.cream) : "-"}`,
       `${copy.order.rowTaste} Flavor: ${c.taste ? tasteCopy(copy, c.taste) : "-"}`,
     ];
-    if (c.inscription.trim()) lines.push(`写字 Inscription: ${c.inscription.trim()}`);
+    if (c.cakeName.trim()) lines.push(`写名字 Name on cake: ${c.cakeName.trim()}`);
+    if (c.cakeAge.trim()) lines.push(`写岁数 Age on cake: ${c.cakeAge.trim()}`);
     if (c.notes.trim()) lines.push(`备注 Notes: ${c.notes.trim()}`);
     lines.push(`姓名 Name: ${c.name} / 电话 Phone: ${c.phone}`);
     lines.push(`取货 Pickup: ${c.pickupDate} ${c.pickupWindow}`);
@@ -200,7 +201,8 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           sizeLabel: result.size ? sizeCopy(copy, result.size).label : "",
           creamLabel: result.cream ? creamCopy(copy, result.cream) : "",
           tasteLabel: result.taste ? tasteCopy(copy, result.taste) : "",
-          inscription: result.inscription,
+          cakeName: result.cakeName,
+          cakeAge: result.cakeAge,
           notes: result.notes,
           pickupHint: `${result.pickupDate} ${result.pickupWindow}`,
           locale,
@@ -265,10 +267,17 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             }
           />
         </dl>
-        {submitted.inscription && (
+        {submitted.cakeName && (
           <p className="mt-4 text-sm text-muted-foreground">
-            {interpolate(copy.order.inscriptionLine, {
-              text: submitted.inscription,
+            {interpolate(copy.order.cakeNameLine, {
+              text: submitted.cakeName,
+            })}
+          </p>
+        )}
+        {submitted.cakeAge && (
+          <p className="mt-1 text-sm text-muted-foreground">
+            {interpolate(copy.order.cakeAgeLine, {
+              text: submitted.cakeAge,
             })}
           </p>
         )}
@@ -583,13 +592,23 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                   ))}
                 </div>
               </div>
-              <Field label={copy.order.inscription} htmlFor="inscription">
+              <Field label={copy.order.cakeName} htmlFor="cake-name">
                 <Input
-                  id="inscription"
+                  id="cake-name"
                   maxLength={24}
-                  placeholder={copy.order.inscriptionPh}
-                  value={draft.inscription}
-                  onChange={(e) => setDraft({ inscription: e.target.value })}
+                  placeholder={copy.order.cakeNamePh}
+                  value={draft.cakeName}
+                  onChange={(e) => setDraft({ cakeName: e.target.value })}
+                />
+              </Field>
+              <Field label={copy.order.cakeAge} htmlFor="cake-age">
+                <Input
+                  id="cake-age"
+                  maxLength={8}
+                  inputMode="numeric"
+                  placeholder={copy.order.cakeAgePh}
+                  value={draft.cakeAge}
+                  onChange={(e) => setDraft({ cakeAge: e.target.value })}
                 />
               </Field>
               <div className="sm:col-span-2">

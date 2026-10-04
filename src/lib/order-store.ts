@@ -16,7 +16,10 @@ export type Draft = {
   cream: CreamId | null;
   /** Taste id, e.g. "matcha". */
   taste: string | null;
-  inscription: string;
+  /** Name to write on the cake (optional). */
+  cakeName: string;
+  /** Age to write on the cake (optional). */
+  cakeAge: string;
   notes: string;
   name: string;
   phone: string;
@@ -48,7 +51,8 @@ const emptyDraft = (): Draft => ({
   flavor: null,
   cream: null,
   taste: null,
-  inscription: "",
+  cakeName: "",
+  cakeAge: "",
   notes: "",
   name: "",
   phone: "",
