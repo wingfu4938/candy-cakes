@@ -170,21 +170,19 @@ export const VISIT = {
 };
 
 /**
- * Pickup time windows for a given date (YYYY-MM-DD), based on opening hours:
+ * Opening hours for a given date (YYYY-MM-DD):
  * Tue 2–6pm, Wed–Fri 11am–6pm, Sat–Sun 9am–6pm, Mon closed.
- * Broad windows (not exact times) spread pickups and leave the exact
- * handover to the Messenger chat. Returns [] on Mondays.
+ * Returns null on Mondays.
  */
-export function pickupWindowsFor(dateStr: string): string[] {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return [];
+export function openingHoursFor(dateStr: string): { open: string; close: string } | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return null;
   const d = new Date(`${dateStr}T12:00:00`);
-  if (Number.isNaN(d.getTime())) return [];
+  if (Number.isNaN(d.getTime())) return null;
   const day = d.getDay(); // 0=Sun … 6=Sat
-  if (day === 1) return []; // Monday closed
-  if (day === 2) return ["14:00–16:00", "16:00–18:00"]; // Tue 2–6pm
-  if (day === 6 || day === 0)
-    return ["09:00–11:00", "11:00–13:00", "13:00–15:00", "15:00–18:00"];
-  return ["11:00–13:00", "13:00–15:00", "15:00–18:00"]; // Wed–Fri
+  if (day === 1) return null; // Monday closed
+  if (day === 2) return { open: "14:00", close: "18:00" }; // Tue 2–6pm
+  if (day === 6 || day === 0) return { open: "09:00", close: "18:00" };
+  return { open: "11:00", close: "18:00" }; // Wed–Fri
 }
 
 /** YYYY-MM-DD for a date `days` from today (local time). */

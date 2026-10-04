@@ -19,7 +19,7 @@ import {
   getCake,
   isMonday,
   leadDaysFor,
-  pickupWindowsFor,
+  openingHoursFor,
   type CategoryId,
   type CreamId,
   type FlavorId,
@@ -101,7 +101,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (c.cakeAge.trim()) lines.push(`写岁数 Age on cake: ${c.cakeAge.trim()}`);
     if (c.notes.trim()) lines.push(`备注 Notes: ${c.notes.trim()}`);
     lines.push(`姓名 Name: ${c.name} / 电话 Phone: ${c.phone}`);
-    lines.push(`取货 Pickup: ${c.pickupDate} ${c.pickupWindow}`);
+    lines.push(`取货 Pickup: ${c.pickupDate} ${c.pickupTime}`);
     if (c.flavor) {
       const origin =
         typeof window !== "undefined" ? window.location.origin : "";
@@ -161,7 +161,17 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     if (!/^[\d\s+-]{8,}$/.test(current.phone.trim())) e.push(copy.order.errPhone);
     if (!current.pickupDate) e.push(copy.order.errPickupDate);
     else if (isMonday(current.pickupDate)) e.push(copy.order.errMondayClosed);
-    if (!current.pickupWindow) e.push(copy.order.errPickupWindow);
+    if (!current.pickupTime) e.push(copy.order.errPickupTime);
+    else {
+      const hours = openingHoursFor(current.pickupDate);
+      if (
+        !hours ||
+        current.pickupTime < hours.open ||
+        current.pickupTime > hours.close
+      ) {
+        e.push(copy.order.errPickupHours);
+      }
+    }
     if (
       !current.size ||
       !current.flavor ||
@@ -204,7 +214,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
           cakeName: result.cakeName,
           cakeAge: result.cakeAge,
           notes: result.notes,
-          pickupHint: `${result.pickupDate} ${result.pickupWindow}`,
+          pickupHint: `${result.pickupDate} ${result.pickupTime}`,
           locale,
         },
       }).catch((err) => {
@@ -262,7 +272,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             label={copy.order.rowPickup}
             value={
               submitted.pickupDate
-                ? `${submitted.pickupDate} ${submitted.pickupWindow}`
+                ? `${submitted.pickupDate} ${submitted.pickupTime}`
                 : undefined
             }
           />
@@ -566,32 +576,21 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                   max={dateStrFromToday(60)}
                   value={draft.pickupDate}
                   onChange={(e) =>
-                    setDraft({ pickupDate: e.target.value, pickupWindow: "" })
+                    setDraft({ pickupDate: e.target.value, pickupTime: "" })
                   }
                 />
               </Field>
-              <div>
-                <p className="mb-2 text-sm font-medium">
-                  {copy.order.pickupWindow}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {pickupWindowsFor(draft.pickupDate).map((w) => (
-                    <button
-                      key={w}
-                      type="button"
-                      onClick={() => setDraft({ pickupWindow: w })}
-                      className={cn(
-                        "rounded-md border px-3 py-2 text-sm transition-colors",
-                        draft.pickupWindow === w
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-card hover:border-primary",
-                      )}
-                    >
-                      {w}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <Field label={copy.order.pickupTime} htmlFor="pickup-time">
+                <Input
+                  id="pickup-time"
+                  type="time"
+                  min={openingHoursFor(draft.pickupDate)?.open}
+                  max={openingHoursFor(draft.pickupDate)?.close}
+                  value={draft.pickupTime}
+                  disabled={!draft.pickupDate}
+                  onChange={(e) => setDraft({ pickupTime: e.target.value })}
+                />
+              </Field>
               <Field label={copy.order.cakeName} htmlFor="cake-name">
                 <Input
                   id="cake-name"
@@ -701,7 +700,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
             label={copy.order.rowPickup}
             value={
               draft.pickupDate
-                ? `${draft.pickupDate}${draft.pickupWindow ? ` ${draft.pickupWindow}` : ""}`
+                ? `${draft.pickupDate}${draft.pickupTime ? ` ${draft.pickupTime}` : ""}`
                 : copy.order.unset
             }
           />
