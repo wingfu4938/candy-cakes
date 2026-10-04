@@ -67,7 +67,7 @@ type State = {
   setDraft: (partial: Partial<Draft>) => void;
   resetDraft: () => void;
   commissions: Commission[];
-  submitCommission: () => Commission | null;
+  submitCommission: (presetId?: string) => Commission | null;
   inquiries: Inquiry[];
   submitInquiry: (input: Omit<Inquiry, "id" | "createdAt">) => Inquiry;
 };
@@ -80,7 +80,7 @@ export const useOrderStore = create<State>()(
         set((s) => ({ draft: { ...s.draft, ...partial } })),
       resetDraft: () => set({ draft: emptyDraft() }),
       commissions: [],
-      submitCommission: () => {
+      submitCommission: (presetId?: string) => {
         const { draft } = get();
         if (
           !draft.size ||
@@ -96,7 +96,7 @@ export const useOrderStore = create<State>()(
         }
         const commission: Commission = {
           ...draft,
-          id: uid(),
+          id: presetId ?? uid(),
           createdAt: new Date().toISOString(),
           leadDays: leadDaysFor(draft),
         };

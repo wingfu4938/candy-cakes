@@ -130,6 +130,8 @@ export type Messages = {
     errPickupTime: string;
     errMondayClosed: string;
     errPickupHours: string;
+    errSlotFull: string;
+    slotFullHint: string;
   };
   categories: Record<CategoryId, string>;
   themes: Record<KidsThemeId, string>;
@@ -332,6 +334,8 @@ const en: Messages = {
     errPickupTime: "Please choose a pickup time",
     errMondayClosed: "We're closed on Mondays — please pick another day",
     errPickupHours: "Please pick a time within opening hours",
+    errSlotFull: "This time is fully booked — please pick another time",
+    slotFullHint: "Fully booked, please pick another time",
   },
   categories: {
     kids: "Kids",
@@ -618,6 +622,8 @@ const zh: Messages = {
     errPickupTime: "请选择取货时间",
     errMondayClosed: "周一休息，请另选一天",
     errPickupHours: "请选择营业时间内的时段",
+    errSlotFull: "这个时段已约满，请另选时间",
+    slotFullHint: "已约满，请另选时间",
   },
   categories: {
     kids: "小孩款",

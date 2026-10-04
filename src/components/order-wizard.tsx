@@ -14,6 +14,7 @@ import {
   SINGLE_TIER_SIZES,
   TIERED_SIZES,
   VISIT,
+  bucketFor,
   cakeNumber,
   dateStrFromToday,
   getCake,
@@ -38,7 +39,8 @@ import {
 } from "@/lib/i18n";
 import { type Commission, useOrderStore } from "@/lib/order-store";
 import { notifyOrderFn } from "@/lib/notify-order";
-import { cn } from "@/lib/utils";
+import { createOrderFn, getSlotCountsFn } from "@/lib/orders-server";
+import { cn, uid } from "@/lib/utils";
 
 function ChoiceCard({
   selected,
@@ -83,6 +85,35 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
   const [errors, setErrors] = useState<string[]>([]);
   const [styleFilter, setStyleFilter] = useState<CategoryId | "all">("all");
   const [summaryCopied, setSummaryCopied] = useState(false);
+  const [slotCounts, setSlotCounts] = useState<Record<string, number>>({});
+  const [slotCapacity, setSlotCapacity] = useState(3);
+
+  // Load booked pickup counts whenever the date changes.
+  useEffect(() => {
+    const date = draft.pickupDate;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      setSlotCounts({});
+      return;
+    }
+    let cancelled = false;
+    getSlotCountsFn({ data: { date } })
+      .then((res) => {
+        if (cancelled) return;
+        setSlotCounts(res.counts);
+        setSlotCapacity(res.capacity);
+      })
+      .catch(() => {
+        if (!cancelled) setSlotCounts({});
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [draft.pickupDate]);
+
+  /** True when the currently chosen time's 30-min bucket is full. */
+  const chosenBucketFull =
+    !!draft.pickupTime &&
+    (slotCounts[bucketFor(draft.pickupTime)] ?? 0) >= slotCapacity;
 
   /** Compact bilingual order summary for pasting into Messenger. */
   function orderSummaryText(c: Commission): string {
@@ -154,7 +185,7 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
     setStepIdx((s) => Math.min(s + 1, stepKeys.length - 1));
   }
 
-  function submit() {
+  async function submit() {
     const current = useOrderStore.getState().draft;
     const e: string[] = [];
     if (!current.name.trim()) e.push(copy.order.errName);
@@ -184,7 +215,51 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
       setErrors(e);
       return;
     }
-    const result = submitCommission();
+    const cakeObj0 = current.flavor ? getCake(current.flavor) : undefined;
+    const cakeName0 = current.flavor ? cakeCopy(copy, current.flavor) : undefined;
+    const cakeLabel0 =
+      cakeObj0 && cakeName0
+        ? `No. ${cakeNumber(cakeObj0)} · ${cakeName0.name}`
+        : (current.flavor ?? "");
+    const orderId = uid();
+    // Reserve the pickup slot on the server first: the INSERT only lands
+    // when the 30-min bucket still has room (atomic, single statement).
+    try {
+      const res = await createOrderFn({
+        data: {
+          orderId,
+          customerName: current.name.trim(),
+          customerPhone: current.phone.trim(),
+          cakeLabel: cakeLabel0,
+          flavorSlug: current.flavor ?? "",
+          sizeLabel: current.size ? sizeCopy(copy, current.size).label : "",
+          creamLabel: current.cream ? creamCopy(copy, current.cream) : "",
+          tasteLabel: current.taste ? tasteCopy(copy, current.taste) : "",
+          cakeName: current.cakeName.trim(),
+          cakeAge: current.cakeAge.trim(),
+          notes: current.notes.trim(),
+          pickupDate: current.pickupDate,
+          pickupTime: current.pickupTime,
+          locale,
+        },
+      });
+      if (!res.ok && res.reason === "slot-full") {
+        setErrors([copy.order.errSlotFull]);
+        // Refresh counts so the hint under the time field is current.
+        getSlotCountsFn({ data: { date: current.pickupDate } })
+          .then((r) => {
+            setSlotCounts(r.counts);
+            setSlotCapacity(r.capacity);
+          })
+          .catch(() => {});
+        return;
+      }
+    } catch (err) {
+      // Server unreachable — don't block the customer; the owner confirms
+      // every order in Messenger anyway.
+      console.warn("[create-order] slot reservation failed, proceeding", err);
+    }
+    const result = submitCommission(orderId);
     if (result) {
       setSubmitted(result);
       setErrors([]);
@@ -590,6 +665,11 @@ export function OrderWizard({ prefills }: { prefills?: string }) {
                   disabled={!draft.pickupDate}
                   onChange={(e) => setDraft({ pickupTime: e.target.value })}
                 />
+                {chosenBucketFull && (
+                  <p className="mt-1 text-xs text-destructive">
+                    {copy.order.slotFullHint}
+                  </p>
+                )}
               </Field>
               <Field label={copy.order.cakeName} htmlFor="cake-name">
                 <Input

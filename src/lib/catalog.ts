@@ -199,3 +199,15 @@ export function isMonday(dateStr: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
   return new Date(`${dateStr}T12:00:00`).getDay() === 1;
 }
+
+/** Max orders sharing one 30-minute pickup bucket. */
+export const MAX_ORDERS_PER_SLOT = 3;
+/** Pickup slot bucket size in minutes. */
+export const SLOT_MINUTES = 30;
+
+/** "17:15" -> "17:00" (30-min bucket start). */
+export function bucketFor(timeHHMM: string): string {
+  const [h, m] = timeHHMM.split(":").map(Number);
+  const bucketMin = Math.floor(m / SLOT_MINUTES) * SLOT_MINUTES;
+  return `${String(h).padStart(2, "0")}:${String(bucketMin).padStart(2, "0")}`;
+}
