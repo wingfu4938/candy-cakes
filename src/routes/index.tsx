@@ -68,6 +68,39 @@ function Home() {
         </div>
       </section>
 
+      <section className="border-t border-border">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
+          <p className="font-sans text-xs tracking-kicker text-muted-foreground uppercase">
+            {copy.home.processKicker}
+          </p>
+          <h2 className="mt-3 font-display text-title text-foreground">
+            {copy.home.processTitle}
+          </h2>
+          <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {copy.process.map((step, i) => (
+              <li key={step.title} className="border-t border-border pt-5">
+                <p className="font-display text-lg text-foreground">
+                  <span className="text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="mx-2 text-muted-foreground">·</span>
+                  {step.title}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {step.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+          <Button asChild size="lg" className="mt-10">
+            <Link to="/order" search={{}}>
+              {copy.home.closeCta}
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
       <section className="border-t border-border bg-card">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
           <div className="flex items-end justify-between gap-4">

@@ -206,7 +206,7 @@ const en: Messages = {
     collectionTitle: "Cakes",
     allCakes: "All cakes",
     processKicker: "How to order",
-    processTitle: "From the first message to pickup",
+    processTitle: "Four steps to pickup",
     notesKicker: "Notes",
     closeTitle: "Need something extra?",
     closeLead:
@@ -222,20 +222,20 @@ const en: Messages = {
   },
   process: [
     {
-      title: "Talk",
-      body: "We listen first. How many, how sweet, wine or none, words on the cake. Twenty minutes, online or in the kitchen.",
+      title: "Pick a cake",
+      body: "Browse the collection and choose your style. Every cake lists its sizes, flavours and how many days ahead to book.",
     },
     {
-      title: "Sketch",
-      body: "Flavour, size and flowers are set. You receive a quote and a collection date. We buy nothing until you confirm.",
+      title: "Fill the order",
+      body: "Pick size, cream and flavour. Add your name and phone, words for the cake, pickup date and time, and notes on colours or details.",
     },
     {
-      title: "Bake",
-      body: "Made the morning of, or the night before. No case stock, and never twice overnight.",
+      title: "Send the summary",
+      body: "After submit you get an order summary. Copy it in one tap and jump straight to Facebook Messenger.",
     },
     {
-      title: "Hand over",
-      body: "Collect at Candy Cakes in Fairfield, or we deliver in Hamilton. Cream cakes in summer travel with ice.",
+      title: "We confirm",
+      body: "Send the summary in Messenger. Once we confirm your slot, we start baking.",
     },
   ],
   testimonials: [
@@ -498,8 +498,8 @@ const zh: Messages = {
     collectionTitle: "此刻的六种",
     allCakes: "全部作品",
     from: "起",
-    processKicker: "Process",
-    processTitle: "从对谈到上桌",
+    processKicker: "下单流程",
+    processTitle: "四步拿到蛋糕",
     notesKicker: "Notes",
     closeTitle: "把日子交给我们",
     closeLead: "填写尺寸、款式与口味。主理人会在一个工作日内回你，核对档期。",
@@ -514,20 +514,20 @@ const zh: Messages = {
   },
   process: [
     {
-      title: "对谈",
-      body: "先听日子。几个人、哪种甜、能不能吃酒、要不要写字。线上或到店，二十分钟。",
+      title: "选款式",
+      body: "在蛋糕系列里挑喜欢的款式，每款都写了尺寸、口味和需要提前几天预订。",
     },
     {
-      title: "图纸",
-      body: "风味、尺寸、花艺定下来，我们会把估价和取件日写给你。确认后才开始备料。",
+      title: "填订单",
+      body: "选尺寸、奶油和口味，填称呼和电话、蛋糕上的名字和岁数、取货日期和时间，备注里写颜色和配件要求。",
     },
     {
-      title: "烘焙",
-      body: "取件当天或前一夜现做。不做柜上的存货，也不隔夜两次。",
+      title: "发明细",
+      body: "提交后页面会显示订单明细，一键复制，直接跳转到 Facebook Messenger。",
     },
     {
-      title: "交付",
-      body: "Fairfield 店自取，或 Hamilton 市区专人送出。夏天的奶油蛋糕，我们会带冰袋。",
+      title: "等确认",
+      body: "把明细发到 Messenger，主理人确认档期后就开始制作。",
     },
   ],
   testimonials: [
