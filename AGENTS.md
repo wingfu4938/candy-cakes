@@ -349,3 +349,17 @@ auth/db: OFF by default — sign-in, @/lib/db or migrations ONLY on an accounts 
 never:   build an app for a greeting/number/question; invent imagine_* calls;
          ask the user to run commands; delete or abandon /workspace/startup.sh
 ```
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in this repo's GitHub Issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five-label vocabulary (needs-triage / needs-info / ready-for-agent / ready-for-human / wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout (root GLOSSARY.md + docs/adr/, created lazily by domain-modeling). See `docs/agents/domain.md`.
