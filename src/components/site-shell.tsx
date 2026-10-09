@@ -90,27 +90,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <BrandLockup />
           </div>
           <div>
-            <p className="font-sans text-xs tracking-kicker text-muted-foreground uppercase">
-              {copy.footer.visitTitle}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed">{copy.footer.address}</p>
-            <dl className="mt-3 space-y-1 text-sm">
-              {copy.footer.hours.map((row) => (
-                <div key={row.day} className="flex justify-between gap-4">
-                  <dt className="text-muted-foreground">{row.day}</dt>
-                  <dd className="text-foreground">{row.time}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-3 text-sm">
-              <a
-                className="text-foreground underline-offset-4 hover:underline"
-                href={VISIT.maps}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {copy.footer.directions}
-              </a>
+            <p className="mt-3 text-sm leading-relaxed text-foreground">
+              {copy.footer.address}
+              <br />
+              {copy.footer.hours}
             </p>
           </div>
           <div>
