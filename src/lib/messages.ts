@@ -20,11 +20,9 @@ export type Messages = {
   footer: {
     book: string;
     hoursNote: string;
-    copyright: string;
-    visitTitle: string;
     address: string;
-    hours: { day: string; time: string }[];
-    directions: string;
+    hours: string;
+    copyright: string;
   };
   home: {
     kicker: string;
@@ -48,9 +46,6 @@ export type Messages = {
     closeCta: string;
     hoursBar: string;
     learnMore: string;
-    visitKicker: string;
-    visitTitle: string;
-    visitLead: string;
   };
   process: { title: string; body: string }[];
   testimonials: { quote: string; by: string }[];
@@ -89,13 +84,8 @@ export type Messages = {
     email: string;
     delivery: string;
     pickup: string;
-    pickupDate: string;
-    pickupTime: string;
-    rowPickup: string;
-    cakeName: string;
-    cakeNamePh: string;
-    cakeAge: string;
-    cakeAgePh: string;
+    inscription: string;
+    inscriptionPh: string;
     notes: string;
     notesPh: string;
     back: string;
@@ -111,14 +101,9 @@ export type Messages = {
     rowDesign: string;
     rowCream: string;
     rowTaste: string;
-    cakeNameLine: string;
-    cakeAgeLine: string;
+    inscriptionLine: string;
     another: string;
     backToCollection: string;
-    chatNow: string;
-    chatHint: string;
-    copiedHint: string;
-    copySummary: string;
     errSize: string;
     errDesign: string;
     errCream: string;
@@ -126,12 +111,6 @@ export type Messages = {
     errName: string;
     errPhone: string;
     errIncomplete: string;
-    errPickupDate: string;
-    errPickupTime: string;
-    errMondayClosed: string;
-    errPickupHours: string;
-    errSlotFull: string;
-    slotFullHint: string;
   };
   categories: Record<CategoryId, string>;
   themes: Record<KidsThemeId, string>;
@@ -177,16 +156,9 @@ const en: Messages = {
   footer: {
     book: "Booking",
     hoursNote: "By appointment",
+    address: "Candy Cakes, Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214",
+    hours: "Tue 2–6pm · Wed–Fri 11am–6pm · Sat–Sun 9am–6pm",
     copyright: "By appointment only",
-    visitTitle: "Visit",
-    address: "Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214",
-    hours: [
-      { day: "Monday", time: "Closed" },
-      { day: "Tuesday", time: "2–6pm" },
-      { day: "Wednesday – Friday", time: "11am–6pm" },
-      { day: "Saturday – Sunday", time: "9am–6pm" },
-    ],
-    directions: "Get directions",
   },
   home: {
     kicker: "Custom cakes · Hamilton",
@@ -206,7 +178,7 @@ const en: Messages = {
     collectionTitle: "Cakes",
     allCakes: "All cakes",
     processKicker: "How to order",
-    processTitle: "Four steps to pickup",
+    processTitle: "From the first message to pickup",
     notesKicker: "Notes",
     closeTitle: "Need something extra?",
     closeLead:
@@ -215,27 +187,23 @@ const en: Messages = {
     hoursBar:
       "Tue 2–6pm · Wed–Fri 11am–6pm · Sat–Sun 9am–6pm · Closed Mon · Pickup in Fairfield",
     learnMore: "Learn more",
-    visitKicker: "Visit",
-    visitTitle: "Pickup in Fairfield",
-    visitLead:
-      "Every cake is made to order. Drop by during opening hours to collect, or sit down and talk through your cake.",
   },
   process: [
     {
-      title: "Pick a cake",
-      body: "Browse the collection and choose your style. Every cake lists its sizes, flavours and how many days ahead to book.",
+      title: "Talk",
+      body: "We listen first. How many, how sweet, wine or none, words on the cake. Twenty minutes, online or in the kitchen.",
     },
     {
-      title: "Fill the order",
-      body: "Pick size, cream and flavour. Add your name and phone, words for the cake, pickup date and time, and notes on colours or details.",
+      title: "Sketch",
+      body: "Flavour, size and flowers are set. You receive a quote and a collection date. We buy nothing until you confirm.",
     },
     {
-      title: "Send the summary",
-      body: "After submit you get an order summary. Copy it in one tap and jump straight to Facebook Messenger.",
+      title: "Bake",
+      body: "Made the morning of, or the night before. No case stock, and never twice overnight.",
     },
     {
-      title: "We confirm",
-      body: "Send the summary in Messenger. Once we confirm your slot, we start baking.",
+      title: "Hand over",
+      body: "Collect at Candy Cakes in Fairfield, or we deliver in Hamilton. Cream cakes in summer travel with ice.",
     },
   ],
   testimonials: [
@@ -291,16 +259,10 @@ const en: Messages = {
     email: "Email (optional)",
     delivery: "Handover",
     pickup: "Collect at Candy Cakes, Fairfield",
-    pickupDate: "Pickup date",
-    pickupTime: "Pickup time",
-    rowPickup: "Pickup",
-    cakeName: "Name on the cake (optional)",
-    cakeNamePh: "E.g. Emma",
-    cakeAge: "Age on the cake (optional)",
-    cakeAgePh: "E.g. 5",
-    notes: "Notes / change requests (optional)",
-    notesPh:
-      "E.g. pink bow instead of blue, skip the pearls… allergies, dislikes…",
+    inscription: "Words on the cake (optional)",
+    inscriptionPh: "24 characters at most",
+    notes: "Allergies, dislikes, anything else (optional)",
+    notesPh: "Nuts, lactose, children at the table, alcohol in the flavour…",
     back: "Back",
     next: "Next",
     send: "Send the request",
@@ -310,19 +272,14 @@ const en: Messages = {
     receivedKicker: "Request received",
     receivedTitle: "{name}, we have it",
     receivedLead:
-      "This is not a confirmed slot. Tap below to chat with us on Facebook Messenger right now and nail down the details — or we'll call or write within a working day.",
+      "This is not a confirmed slot. The chef will call or write within a working day to check allergies and delivery.",
     rowSize: "Size",
     rowDesign: "Design",
     rowCream: "Cream",
     rowTaste: "Flavor",
-    cakeNameLine: "Name on cake: {text}",
-    cakeAgeLine: "Age on cake: {text}",
+    inscriptionLine: "Inscription: {text}",
     another: "Order another",
     backToCollection: "Back to cakes",
-    chatNow: "Chat details on Facebook",
-    chatHint: "Order details copied — paste and send in Messenger.",
-    copiedHint: "Copied ✓",
-    copySummary: "Copy order details",
     errSize: "Please choose a size",
     errDesign: "Please choose a design",
     errCream: "Please choose a cream",
@@ -330,12 +287,6 @@ const en: Messages = {
     errName: "Please leave a name",
     errPhone: "Please leave a valid phone number",
     errIncomplete: "Earlier steps are still open",
-    errPickupDate: "Please choose a pickup date",
-    errPickupTime: "Please choose a pickup time",
-    errMondayClosed: "We're closed on Mondays — please pick another day",
-    errPickupHours: "Please pick a time within opening hours",
-    errSlotFull: "This time is fully booked — please pick another time",
-    slotFullHint: "Fully booked, please pick another time",
   },
   categories: {
     kids: "Kids",
@@ -471,15 +422,8 @@ const zh: Messages = {
     book: "预约",
     hoursNote: "仅预约",
     copyright: "仅预约",
-    visitTitle: "到店",
-    address: "Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214",
-    hours: [
-      { day: "周一", time: "休息" },
-      { day: "周二", time: "14:00–18:00" },
-      { day: "周三至周五", time: "11:00–18:00" },
-      { day: "周六、周日", time: "9:00–18:00" },
-    ],
-    directions: "查看路线",
+    address: "Candy Cakes，Shop 4 / 977 Heaphy Terrace，Fairfield，Hamilton 3214",
+    hours: "周二 14:00–18:00 · 周三至周五 11:00–18:00 · 周六周日 09:00–18:00",
   },
   home: {
     kicker: "Atelier · Hamilton",
@@ -498,36 +442,29 @@ const zh: Messages = {
     collectionTitle: "此刻的六种",
     allCakes: "全部作品",
     from: "起",
-    processKicker: "下单流程",
-    processTitle: "四步拿到蛋糕",
+    processKicker: "Process",
+    processTitle: "从对谈到上桌",
     notesKicker: "Notes",
     closeTitle: "把日子交给我们",
     closeLead: "填写尺寸、款式与口味。主理人会在一个工作日内回你，核对档期。",
     closeCta: "开始订制",
-    hoursBar:
-      "周二 14–18点 · 周三至周五 11–18点 · 周六日 9–18点 · 周一休息 · Fairfield 自取",
-    learnMore: "了解更多",
-    visitKicker: "到店",
-    visitTitle: "Fairfield 自取",
-    visitLead:
-      "所有蛋糕均为预订现做。欢迎在营业时间到店自取，也可以坐下来慢慢谈你的蛋糕。",
   },
   process: [
     {
-      title: "选款式",
-      body: "在蛋糕系列里挑喜欢的款式，每款都写了尺寸、口味和需要提前几天预订。",
+      title: "对谈",
+      body: "先听日子。几个人、哪种甜、能不能吃酒、要不要写字。线上或到店，二十分钟。",
     },
     {
-      title: "填订单",
-      body: "选尺寸、奶油和口味，填称呼和电话、蛋糕上的名字和岁数、取货日期和时间，备注里写颜色和配件要求。",
+      title: "图纸",
+      body: "风味、尺寸、花艺定下来，我们会把估价和取件日写给你。确认后才开始备料。",
     },
     {
-      title: "发明细",
-      body: "提交后页面会显示订单明细，一键复制，直接跳转到 Facebook Messenger。",
+      title: "烘焙",
+      body: "取件当天或前一夜现做。不做柜上的存货，也不隔夜两次。",
     },
     {
-      title: "等确认",
-      body: "把明细发到 Messenger，主理人确认档期后就开始制作。",
+      title: "交付",
+      body: "Fairfield 店自取，或 Hamilton 市区专人送出。夏天的奶油蛋糕，我们会带冰袋。",
     },
   ],
   testimonials: [
@@ -580,15 +517,10 @@ const zh: Messages = {
     email: "邮箱（选填）",
     delivery: "交付",
     pickup: "Fairfield 店自取",
-    pickupDate: "取货日期",
-    pickupTime: "取货时间",
-    rowPickup: "取货",
-    cakeName: "蛋糕上的名字（选填）",
-    cakeNamePh: "比如：Emma",
-    cakeAge: "蛋糕上的岁数（选填）",
-    cakeAgePh: "比如：5",
-    notes: "备注 / 调整需求（选填）",
-    notesPh: "比如：蝴蝶结换粉色、去掉珍珠装饰；或写过敏、忌口…",
+    inscription: "蛋糕上的字（选填）",
+    inscriptionPh: "最多二十四字",
+    notes: "过敏、忌口、其它（选填）",
+    notesPh: "坚果、乳糖、是否有儿童、是否需要酒类风味…",
     back: "上一步",
     next: "下一步",
     send: "送出预约",
@@ -598,19 +530,14 @@ const zh: Messages = {
     receivedKicker: "预约已收下",
     receivedTitle: "{name}，我们记下了",
     receivedLead:
-      "这不是自动确认档期。点下面直接去 Facebook 跟我们聊，把明细定下来——或者我们会在一个工作日内打电话或写信给你。",
+      "这不是自动确认档期。主理人会在一个工作日内打电话或写信给你，核对过敏和送件。",
     rowSize: "尺寸",
     rowDesign: "款式",
     rowCream: "奶油种类",
     rowTaste: "口味",
-    cakeNameLine: "写名字：{text}",
-    cakeAgeLine: "写岁数：{text}",
+    inscriptionLine: "写字：{text}",
     another: "再订一块",
     backToCollection: "回作品集",
-    chatNow: "去 Facebook 聊明细",
-    chatHint: "订单明细已复制，打开 Messenger 粘贴发送即可。",
-    copiedHint: "已复制 ✓",
-    copySummary: "复制订单明细",
     errSize: "请选择尺寸",
     errDesign: "请选择款式",
     errCream: "请选择奶油种类",
@@ -618,12 +545,6 @@ const zh: Messages = {
     errName: "请留下姓名",
     errPhone: "请留下有效电话",
     errIncomplete: "前面的选择还不完整",
-    errPickupDate: "请选择取货日期",
-    errPickupTime: "请选择取货时间",
-    errMondayClosed: "周一休息，请另选一天",
-    errPickupHours: "请选择营业时间内的时段",
-    errSlotFull: "这个时段已约满，请另选时间",
-    slotFullHint: "已约满，请另选时间",
   },
   categories: {
     kids: "小孩款",
