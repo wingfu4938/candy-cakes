@@ -175,17 +175,14 @@ function Home() {
             </a>
           </div>
           <dl className="space-y-0 divide-y divide-border border-y border-border">
-            {copy.footer.hours.map((row) => (
-              <div
-                key={row.day}
-                className="flex items-center justify-between py-3.5"
-              >
-                <dt className="text-sm text-muted-foreground">{row.day}</dt>
-                <dd className="text-sm font-medium text-foreground">
-                  {row.time}
-                </dd>
-              </div>
-            ))}
+            <div className="flex items-center justify-between gap-4 py-3.5">
+              <dt className="text-sm text-muted-foreground">
+                {copy.footer.hoursNote}
+              </dt>
+              <dd className="text-right text-sm font-medium text-foreground">
+                {copy.footer.hours}
+              </dd>
+            </div>
           </dl>
         </div>
       </section>

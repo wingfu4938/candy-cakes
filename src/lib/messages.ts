@@ -23,6 +23,7 @@ export type Messages = {
     address: string;
     hours: string;
     copyright: string;
+    directions: string;
   };
   home: {
     kicker: string;
@@ -46,6 +47,9 @@ export type Messages = {
     closeCta: string;
     hoursBar: string;
     learnMore: string;
+    visitKicker: string;
+    visitTitle: string;
+    visitLead: string;
   };
   process: { title: string; body: string }[];
   testimonials: { quote: string; by: string }[];
@@ -159,6 +163,7 @@ const en: Messages = {
     address: "Candy Cakes, Shop 4 / 977 Heaphy Terrace, Fairfield, Hamilton 3214",
     hours: "Tue 2–6pm · Wed–Fri 11am–6pm · Sat–Sun 9am–6pm",
     copyright: "By appointment only",
+    directions: "Get directions",
   },
   home: {
     kicker: "Custom cakes · Hamilton",
@@ -187,6 +192,10 @@ const en: Messages = {
     hoursBar:
       "Tue 2–6pm · Wed–Fri 11am–6pm · Sat–Sun 9am–6pm · Closed Mon · Pickup in Fairfield",
     learnMore: "Learn more",
+    visitKicker: "Visit",
+    visitTitle: "Pickup in Fairfield",
+    visitLead:
+      "Every cake is made to order. Drop by during opening hours to collect, or sit down and talk through your cake.",
   },
   process: [
     {
@@ -424,6 +433,7 @@ const zh: Messages = {
     copyright: "仅预约",
     address: "Candy Cakes，Shop 4 / 977 Heaphy Terrace，Fairfield，Hamilton 3214",
     hours: "周二 14:00–18:00 · 周三至周五 11:00–18:00 · 周六周日 09:00–18:00",
+    directions: "查看路线",
   },
   home: {
     kicker: "Atelier · Hamilton",
@@ -448,6 +458,10 @@ const zh: Messages = {
     closeTitle: "把日子交给我们",
     closeLead: "填写尺寸、款式与口味。主理人会在一个工作日内回你，核对档期。",
     closeCta: "开始订制",
+    visitKicker: "到店",
+    visitTitle: "Fairfield 自取",
+    visitLead:
+      "所有蛋糕均为预订现做。欢迎在营业时间到店自取，也可以坐下来慢慢谈你的蛋糕。",
   },
   process: [
     {
