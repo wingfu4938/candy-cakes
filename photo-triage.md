@@ -241,3 +241,9 @@
 - wed-005：浆果蛋糕，底座 Happy 1st Anniversary，无人名
 - wed-007：粉色爱心蛋糕，金色 Bride to Be，无人名
 - wed-008：白色蝴蝶结婚礼蛋糕，新人剪影插牌，无文字
+
+## 2026-10-14 新增 56 张（第二批）
+
+> 用户当晚发来 56 张新照片，逐张分拣：kids 21、baby 6、boss 7、fruit 5、lady 5、pipe 5、fresh 3、old 2、cup 1、cre 1（编号续接各分类最大值）。
+> 其中 34 张含客人名字/昵称，已逐张定位打码并全部抽查验证（含 ASHVIK 两处、篮球款顶面 ARYA 等隐蔽位置）；贝壳款 fresh-008 的 VASU 金字因对比度高加强打码三轮才至不可读。通用祝福语（Happy Birthday、DADDY、September Babies、老婆生日快乐等）未动。
+> 统一裁切 680x907、jpg+webp 双份，gallery-data.ts 已追加，图库总数 287 款。提交 7dbb319，线上已验证新图 200。
