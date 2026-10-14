@@ -323,4 +323,7 @@ export const GALLERY: GalleryCake[] = [
   { slug: "pipe-045", category: "pipe", image: "/cakes/gallery/pipe-045.jpg" },
   { slug: "pipe-046", category: "pipe", image: "/cakes/gallery/pipe-046.jpg" },
   { slug: "pipe-047", category: "pipe", image: "/cakes/gallery/pipe-047.jpg" },
+  { slug: "kids-109", category: "kids", image: "/cakes/gallery/kids-109.jpg" , theme: "cartoon" },
+  { slug: "kids-110", category: "kids", image: "/cakes/gallery/kids-110.jpg" , theme: "ocean" },
+  { slug: "cre-023", category: "cre", image: "/cakes/gallery/cre-023.jpg" },
 ];
